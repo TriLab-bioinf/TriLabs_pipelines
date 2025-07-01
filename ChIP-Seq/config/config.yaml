@@ -1,0 +1,34 @@
+## Metadata
+
+# Path to sample file
+metadata: ./config/samplesheet.csv
+
+# Genome reference info
+reference:  
+    # Path to annotation file in gtf format
+    gtf: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/gtf/Homo_sapiens.GRCh38.110.gtf
+    # Path to reference genome in fasta format
+    fasta: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/fasta/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+    # Chromosome length
+    idx: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/STARindex/chrNameLength.txt
+    # Genome size for macs2 callpeak
+    gsize: hs
+
+# bowtie database    
+bowtiedb: 
+    # Path to bowtie2 database (set bowtie_db: None if a new db has to be generated)
+    path: None
+    
+# Path to trimming adapters file
+adapters: /usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa
+
+# Flag duplicated reads [true, false]
+flag_dup: True
+
+# Make bigwig files from bam files
+    # bw_bin: --binSize = Size of the bins
+    # bw_normalization: --normalizeUsing = [RPKM,CPM,BPM,RPGC,None]
+    # bw_ignire_dup: --ignoreDuplicates
+bw_bin: 50
+bw_normalization: "BPM"
+bw_ignore_dup: True

@@ -1,0 +1,18 @@
+# Technologu prefixes from read IDs,,
+# @HWI-Mxxxx or @Mxxxx - MiSeq,,
+# @HWUSI - GAIIx,,
+# @HWI-Dxxxx - HiSeq 2000/2500,,
+# @Kxxxx - HiSeq 3000(?)/4000,,
+# @Nxxxx - NextSeq 500/550,,
+# @Axxxxx - NovaSeq,,
+# @Vxxxxx = NextSeq 2000,,
+# @AAxxxxx - NextSeq 2000 P1/P2/P3,,
+# _2225* - NextSeq P4,,
+# @Hxxxxxx - NovaSeq S1/S2/S4,,
+#,,
+# Sample sheet for Illumina sequencing,,
+sample,type,fastq_1
+PolII_ChIPSeq,treat,PolII_ChIPSeq_treat.fastq.gz
+PolII_ChIPSeq,input,PolII_ChIPSeq_input.fastq.gz
+TRIM28_ChIPSeq,treat,TRIM28_ChIPSeq_treat.fastq.gz
+TRIM28_ChIPSeq,input,TRIM28_ChIPSeq_input.fastq.gz
