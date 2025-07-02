@@ -12,7 +12,7 @@
 #,,
 # Sample sheet for Illumina sequencing,,
 sample,type,fastq_1
-PolII_ChIPSeq,treat,PolII_ChIPSeq_treat.fastq.gz
-PolII_ChIPSeq,input,PolII_ChIPSeq_input.fastq.gz
-TRIM28_ChIPSeq,treat,TRIM28_ChIPSeq_treat.fastq.gz
-TRIM28_ChIPSeq,input,TRIM28_ChIPSeq_input.fastq.gz
+ChIP_rep1,treat,rep1.fastq.gz
+ChIP_rep1,input,ctl1.fastq.gz
+ChIP_rep2,treat,rep2.fastq.gz
+ChIP_rep2,input,ctl2.fastq.gz
