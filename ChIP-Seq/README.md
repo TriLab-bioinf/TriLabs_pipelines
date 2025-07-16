@@ -1,6 +1,6 @@
 # How to run the ChIP-seq pipeline 
 
-**Figure 1:** Schematic representation of the Snakemake RNAseq pipeline 
+**Figure 1:** Schematic representation of the Snakemake ChIP-seq pipeline 
 ![](ChIP-seq.png)
 
 ## A. Setup the pipeline for the first time:
@@ -13,12 +13,12 @@ Note: This should be done only once.
 ```
 git clone https://github.com/TriLab-bioinf/GUYDOSH_LAB_TK_196.git 
 
-mv GUYDOSH_LAB_TK_196 ChIPseq_pipeline
+mv GUYDOSH_LAB_TK_196 ChIP-seq_pipeline
 
-cd ChIPseq_pipeline
+cd ChIP-seq_pipeline
 ```
 
-### 3- Copy Biowulf Snakemake profile in ChIPseq_pipeline/config directory
+### 3- Copy Biowulf Snakemake profile in ChIP-seq_pipeline/config directory
 ```
 # Download the biowulf snakemake profile from GitHub
 git clone https://github.com/NIH-HPC/snakemake_profile.git
@@ -27,9 +27,9 @@ git clone https://github.com/NIH-HPC/snakemake_profile.git
 mv snakemake_profile ./config/
 ```
 
-### Now you should be ready to run the ChIPseq pipeline 
+### Now you should be ready to run the ChIP-seq pipeline 
 
-## B. Running the ChIPseq pipeline in Biowulf
+## B. Running the ChIP-seq pipeline in Biowulf
 
 ### 1- Within the config directory do the following:
 
@@ -63,7 +63,7 @@ sbatch run_snakemake.sh ./workflow/ChIP-seq_pipeline.smk
 
 ### 5- To fetch the shell commands ran by the snakemake pipeline use the following command
 ```
-print_snakemake_shell_commands.sh -c module,STAR,samtools,bamCoverage,featureCounts,multiqc -p workflow/RNAseq_pipeline.smk
+print_snakemake_shell_commands.sh -c module,STAR,samtools,bamCoverage,featureCounts,multiqc -p workflow/ChIP-seq_pipeline.smk
 ```
 The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
 
