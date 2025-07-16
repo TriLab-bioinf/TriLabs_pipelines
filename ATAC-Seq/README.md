@@ -1,6 +1,7 @@
 # How to run the ATAC-seq pipeline 
 
-**Figure 1:** Schematic representation of the Snakemake ATAC-seq pipeline 
+**Figure 1:** Schematic representation of the Snakemake ATAC-seq pipeline
+
 ![](ATAC-seq.png)
 
 ## A. Setup the pipeline for the first time:
