@@ -11,9 +11,9 @@ Note: This should be done only once.
 
 ### 2- Download the ChIP-Seq pipeline by running the  following command in your WD:
 ```
-git clone https://github.com/TriLab-bioinf/GUYDOSH_LAB_TK_196.git 
+git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git
 
-mv GUYDOSH_LAB_TK_196 ChIP-seq_pipeline
+mv TriLabs_pipelines/ChIP-Seq/ ChIP-seq_pipeline
 
 cd ChIP-seq_pipeline
 ```
