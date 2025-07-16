@@ -1,6 +1,7 @@
 # How to run the ChIP-seq pipeline 
 
 **Figure 1:** Schematic representation of the Snakemake ChIP-seq pipeline 
+
 ![](ChIP-seq.png)
 
 ## A. Setup the pipeline for the first time:
