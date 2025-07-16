@@ -1,0 +1,307 @@
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM007.P.R1.fastq.gz results/1-trim/SCM007.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM007.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM007 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM007.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM007.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM007.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM009.P.R1.fastq.gz results/1-trim/SCM009.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM009.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM009 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM009.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM009.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM009.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM003.P.R1.fastq.gz results/1-trim/SCM003.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM003.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM003 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM003.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM003.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM003.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM005.P.R1.fastq.gz results/1-trim/SCM005.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM005.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM005 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM005.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM005.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM005.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM008.P.R1.fastq.gz results/1-trim/SCM008.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM008.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM008 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM008.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM008.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM008.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM002.P.R1.fastq.gz results/1-trim/SCM002.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM002.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM002 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM002.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM002.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM002.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM010.P.R1.fastq.gz results/1-trim/SCM010.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM010.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM010 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM010.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM010.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM010.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM004.P.R1.fastq.gz results/1-trim/SCM004.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM004.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM004 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM004.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM004.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM004.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM001.P.R1.fastq.gz results/1-trim/SCM001.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM001.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM001 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM001.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM001.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM001.star.log 2>&1
+----------------------
+module load STAR/2.7.11b samtools/1.21
+----------------------
+STAR
+  --runMode alignReads                
+  --runThreadN 1                
+  --genomeDir data/stardb/                
+  --alignSJDBoverhangMin 1                
+  --alignSJoverhangMin 5                
+  --outFilterMismatchNmax 2                
+  --alignEndsType EndToEnd                
+  --readFilesIn results/1-trim/SCM006.P.R1.fastq.gz results/1-trim/SCM006.P.R2.fastq.gz                
+  --readFilesCommand zcat                
+  --outFileNamePrefix results/2-map_reads/SCM006.                
+  --quantMode GeneCounts                
+  --outSAMtype BAM SortedByCoordinate                
+  --outSAMattrRGline ID:$$ SM:SCM006 PL:ILLUMINA                
+  --outSAMattributes All > logs/2-map_reads/SCM006.star.log 2>&1
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/SCM006.Aligned.sortedByCoord.out.bam >> logs/2-map_reads/SCM006.star.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM002.dedup.bam
+  -o results/5-bigwig/SCM002.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM002.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM004.dedup.bam
+  -o results/5-bigwig/SCM004.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM004.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM006.dedup.bam
+  -o results/5-bigwig/SCM006.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM006.bamCoverage.log 2>&1
+----------------------
+featureCounts
+  -t CDS
+  -g gene_id
+  -O
+  -s 2
+  -J
+  -R BAM
+  -M
+  --fraction
+  -p
+  --ignoreDup
+  --ignoreDup
+  -G /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/fasta/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+  -T 1        
+  -a /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/gtf/Homo_sapiens.GRCh38.110.gtf         
+  -o results/4-read_counts/read_counts results/3-noduplicates/SCM001.dedup.bam results/3-noduplicates/SCM002.dedup.bam results/3-noduplicates/SCM003.dedup.bam results/3-noduplicates/SCM004.dedup.bam results/3-noduplicates/SCM005.dedup.bam results/3-noduplicates/SCM006.dedup.bam results/3-noduplicates/SCM007.dedup.bam results/3-noduplicates/SCM008.dedup.bam results/3-noduplicates/SCM009.dedup.bam results/3-noduplicates/SCM010.dedup.bam > logs/4-read_counts/featureCounts.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM008.dedup.bam
+  -o results/5-bigwig/SCM008.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM008.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM001.dedup.bam
+  -o results/5-bigwig/SCM001.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM001.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM010.dedup.bam
+  -o results/5-bigwig/SCM010.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM010.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM003.dedup.bam
+  -o results/5-bigwig/SCM003.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM003.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM005.dedup.bam
+  -o results/5-bigwig/SCM005.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM005.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM007.dedup.bam
+  -o results/5-bigwig/SCM007.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM007.bamCoverage.log 2>&1
+----------------------
+bamCoverage
+  -p 1
+  -b results/3-noduplicates/SCM009.dedup.bam
+  -o results/5-bigwig/SCM009.bw
+  --binSize 50
+  --normalizeUsing BPM
+  --ignoreDuplicates > logs/5-bigwig/SCM009.bamCoverage.log 2>&1
+----------------------

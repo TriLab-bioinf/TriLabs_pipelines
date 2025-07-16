@@ -1,0 +1,50 @@
+## Metadata
+
+# Path to sample file
+metadata: ./config/samplesheet.csv
+
+# Genome reference info
+reference:  
+    # Path to annotation file in gtf format
+    gtf: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/gtf/Homo_sapiens.GRCh38.110.gtf
+    # Path to reference genome in fasta format
+    fasta: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/fasta/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+
+# STAR database    
+stardb:
+    # Path to STAR database (e.g data/stardb/ .Set star_db: None if a new db has to be generated)
+    path: None
+    # Overhang value for database generation (read length - 1)
+    sjdbOverhang: 50 
+
+# Path to raw reads directory (fastq files) 
+reads: /data/Guydoshlab/insulin_share/rnaseq
+
+# Perform trimming [True, False]
+trimming: True
+# Path to trimming adapters file
+adapters: data/adapters/adapters.fa
+
+# Flag duplicated reads [True, False]
+flag_dup: True
+
+# feaureCount parameters
+    # -p = count fragments instead of individual reads (assumes paired-end reads)
+    # -M = include multi-mapping reads 
+    # -O count reads mapping overlapping features
+    # --fraction = multimapped reads will be caused as a fraction instead of 1 (1/x where x = numb alignments reported for same read)
+    # -s = stranded [0 = unstranded ; 1 = forward -stranded ; 2 = reverse-stranded]
+    # --ignoreDup = Ignore reads flagged as duplicated
+    # -t = annotation feature to be counted [gene, exon, CDS, other available features in the gtf file]
+    # -g = gtf field from the comment column in the gtf file to use as ID 
+feat_counts_param: "-t CDS -g gene_id -O -s 2 -J -R BAM -M --fraction -p --ignoreDup"
+    # Count [True]/ ignore [False] reads that were flagged as duplicated 
+count_duplicates: False
+# Make bigwig files from bam files
+    # bw_bin: --binSize = Size of the bins
+    # bw_normalization: --normalizeUsing = [RPKM,CPM,BPM,RPGC,None]
+    # bw_ignire_dup: --ignoreDuplicates
+bw_bin: 10
+bw_normalization: "BPM"
+bw_ignore_dup: True
+

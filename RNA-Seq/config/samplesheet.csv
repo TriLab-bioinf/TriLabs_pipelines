@@ -1,0 +1,24 @@
+# Technologu prefixes from read IDs
+# @HWI-Mxxxx or @Mxxxx - MiSeq
+# @HWUSI - GAIIx
+# @HWI-Dxxxx - HiSeq 2000/2500
+# @Kxxxx - HiSeq 3000(?)/4000
+# @Nxxxx - NextSeq 500/550
+# @Axxxxx - NovaSeq
+# @Vxxxxx = NextSeq 2000
+# @AAxxxxx - NextSeq 2000 P1/P2/P3
+# _2225* - NextSeq P4
+# @Hxxxxxx - NovaSeq S1/S2/S4
+#
+# Sample sheet for Illumina sequencing
+sample_ID,fastq_1,fastq_2
+SCM001,SCM001_1_S1_L001_R1_001.fastq.gz,SCM001_1_S1_L001_R2_001.fastq.gz
+SCM002,SCM002_2_S2_L001_R1_001.fastq.gz,SCM002_2_S2_L001_R2_001.fastq.gz
+SCM003,SCM003_3_S3_L001_R1_001.fastq.gz,SCM003_3_S3_L001_R2_001.fastq.gz
+SCM004,SCM004_4_S4_L001_R1_001.fastq.gz,SCM004_4_S4_L001_R2_001.fastq.gz
+SCM005,SCM005_5_S5_L001_R1_001.fastq.gz,SCM005_5_S5_L001_R2_001.fastq.gz
+SCM006,SCM006_6_S6_L001_R1_001.fastq.gz,SCM006_6_S6_L001_R2_001.fastq.gz
+SCM007,SCM007_7_S7_L001_R1_001.fastq.gz,SCM007_7_S7_L001_R2_001.fastq.gz
+SCM008,SCM008_8_S8_L001_R1_001.fastq.gz,SCM008_8_S8_L001_R2_001.fastq.gz
+SCM009,SCM009_9_S9_L001_R1_001.fastq.gz,SCM009_9_S9_L001_R2_001.fastq.gz
+SCM010,SCM010_10_S10_L001_R1_001.fastq.gz,SCM010_10_S10_L001_R2_001.fastq.gz
