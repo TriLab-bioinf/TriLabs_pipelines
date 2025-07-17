@@ -68,5 +68,4 @@ print_snakemake_shell_commands.sh -c  module,trimmomatic,bowtie,samtools,picard,
 ```
 The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
 
-### R scripts for running the.... analysis are located in the `R` directory
  
