@@ -14,7 +14,7 @@ Note: This should be done only once.
 ```
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git
 
-mv TriLabs_pipelines/ATAC-seq/ ATAC-seq_pipeline
+mv TriLabs_pipelines/ATAC-Seq/ ATAC-seq_pipeline
 
 cd ATAC-seq_pipeline
 ```
