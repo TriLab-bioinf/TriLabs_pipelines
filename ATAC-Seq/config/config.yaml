@@ -20,7 +20,7 @@ bowtiedb:
     path: None
     
 # Path to trimming adapters file
-adapters: /usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa
+adapters: /usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa
 
 # Flag duplicated reads [true, false]
 flag_dup: True
