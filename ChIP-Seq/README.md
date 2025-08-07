@@ -1,8 +1,8 @@
 # How to run the ChIP-seq pipeline 
 
-**Figure 1:** Schematic representation of the Snakemake ChIP-seq pipeline 
-
 ![](ChIP-seq.png)
+
+**Figure 1:** Schematic representation of the Snakemake ChIP-seq pipeline 
 
 ## A. Setup the pipeline for the first time:
 
@@ -64,9 +64,8 @@ sbatch run_snakemake.sh ./workflow/ChIP-seq_pipeline.smk
 
 ### 5- To fetch the shell commands ran by the snakemake pipeline use the following command
 ```
-print_snakemake_shell_commands.sh -c  module,trimmomatic,bowtie,samtools,picard,macs,ucsc,deeptools,multiqc -p workflow/ChIP-seq_pipeline.smk
+bash print_snakemake_shell_commands.sh -c  module,trimmomatic,bowtie,samtools,picard,macs,ucsc,deeptools,multiqc -p workflow/ChIP-seq_pipeline.smk
 ```
 The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
 
-### R scripts for running the.... analysis are located in the `R` directory
  

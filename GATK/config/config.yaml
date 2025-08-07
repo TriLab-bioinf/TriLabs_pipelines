@@ -1,0 +1,33 @@
+## Metadata
+
+# Path to sample file
+metadata: ./config/samplesheet.csv
+
+# Genome reference info
+reference:  
+    # Path to reference genome in fasta format
+    fasta: /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta
+    dict: /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.dict
+
+# bwa database    
+bwadb: 
+    # Path to bwa database (set bwa_db: None if a new db has to be generated)
+    path: None
+    
+# Path to trimming adapters file
+adapters: /usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa
+
+# Flag duplicated reads [true, false]
+flag_dup: True
+
+# Path to known sites
+known_sites:
+    - "/fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz"
+    - "/fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz"
+    - "/fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
+    - "/fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz"
+    - "/fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz"
+
+##### Wildcard constraints #####
+wildcard_constraints:
+    vartype="snvs|indels"

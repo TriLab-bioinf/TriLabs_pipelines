@@ -1,0 +1,200 @@
+module load trimmomatic
+----------------------
+trimmomatic SE                
+  -threads 1                 data/reads/ctl2.fastq.gz                 results/1-trim/ChIP_rep2_input.trimmed.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/ChIP_rep2_input.log 2>&1
+----------------------
+module load trimmomatic
+----------------------
+trimmomatic SE                
+  -threads 1                 data/reads/ctl1.fastq.gz                 results/1-trim/ChIP_rep1_input.trimmed.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/ChIP_rep1_input.log 2>&1
+----------------------
+module load trimmomatic
+----------------------
+trimmomatic SE                
+  -threads 1                 data/reads/rep2.fastq.gz                 results/1-trim/ChIP_rep2_treat.trimmed.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/ChIP_rep2_treat.log 2>&1
+----------------------
+module load trimmomatic
+----------------------
+trimmomatic SE                
+  -threads 1                 data/reads/rep1.fastq.gz                 results/1-trim/ChIP_rep1_treat.trimmed.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-SE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/ChIP_rep1_treat.log 2>&1
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x data/bowtiedb/genome        
+  --threads 1        
+  --phred33        
+  --rg-id ChIP_rep1_treat
+  --rg SM:ChIP_rep1_treat
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -U results/1-trim/ChIP_rep1_treat.trimmed.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/ChIP_rep1_treat.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/ChIP_rep1_treat.bam
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x data/bowtiedb/genome        
+  --threads 1        
+  --phred33        
+  --rg-id ChIP_rep2_treat
+  --rg SM:ChIP_rep2_treat
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -U results/1-trim/ChIP_rep2_treat.trimmed.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/ChIP_rep2_treat.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/ChIP_rep2_treat.bam
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x data/bowtiedb/genome        
+  --threads 1        
+  --phred33        
+  --rg-id ChIP_rep2_input
+  --rg SM:ChIP_rep2_input
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -U results/1-trim/ChIP_rep2_input.trimmed.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/ChIP_rep2_input.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/ChIP_rep2_input.bam
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x data/bowtiedb/genome        
+  --threads 1        
+  --phred33        
+  --rg-id ChIP_rep1_input
+  --rg SM:ChIP_rep1_input
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -U results/1-trim/ChIP_rep1_input.trimmed.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/ChIP_rep1_input.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/ChIP_rep1_input.bam
+----------------------
+module load picard samtools
+----------------------
+java
+  -Xmx80g
+  -Xms80g
+  -XX:ParallelGCThreads=24
+  -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
+  -I results/2-map_reads/ChIP_rep1_input.bam         
+  -O results/3-dedup/ChIP_rep1_input.dedup.bam         
+  -M results/3-dedup/ChIP_rep1_input.metrics.txt         
+  --READ_NAME_REGEX null
+  --REMOVE_DUPLICATES false         
+  --TMP_DIR results/3-dedup/ChIP_rep1_input.tmp > results/3-dedup/ChIP_rep1_input.dedup.log 2>&1
+----------------------
+samtools index results/3-dedup/ChIP_rep1_input.dedup.bam
+----------------------
+module load picard samtools
+----------------------
+java
+  -Xmx80g
+  -Xms80g
+  -XX:ParallelGCThreads=24
+  -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
+  -I results/2-map_reads/ChIP_rep2_input.bam         
+  -O results/3-dedup/ChIP_rep2_input.dedup.bam         
+  -M results/3-dedup/ChIP_rep2_input.metrics.txt         
+  --READ_NAME_REGEX null
+  --REMOVE_DUPLICATES false         
+  --TMP_DIR results/3-dedup/ChIP_rep2_input.tmp > results/3-dedup/ChIP_rep2_input.dedup.log 2>&1
+----------------------
+samtools index results/3-dedup/ChIP_rep2_input.dedup.bam
+----------------------
+module load picard samtools
+----------------------
+java
+  -Xmx80g
+  -Xms80g
+  -XX:ParallelGCThreads=24
+  -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
+  -I results/2-map_reads/ChIP_rep1_treat.bam         
+  -O results/3-dedup/ChIP_rep1_treat.dedup.bam         
+  -M results/3-dedup/ChIP_rep1_treat.metrics.txt         
+  --READ_NAME_REGEX null
+  --REMOVE_DUPLICATES false         
+  --TMP_DIR results/3-dedup/ChIP_rep1_treat.tmp > results/3-dedup/ChIP_rep1_treat.dedup.log 2>&1
+----------------------
+samtools index results/3-dedup/ChIP_rep1_treat.dedup.bam
+----------------------
+module load picard samtools
+----------------------
+java
+  -Xmx80g
+  -Xms80g
+  -XX:ParallelGCThreads=24
+  -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
+  -I results/2-map_reads/ChIP_rep2_treat.bam         
+  -O results/3-dedup/ChIP_rep2_treat.dedup.bam         
+  -M results/3-dedup/ChIP_rep2_treat.metrics.txt         
+  --READ_NAME_REGEX null
+  --REMOVE_DUPLICATES false         
+  --TMP_DIR results/3-dedup/ChIP_rep2_treat.tmp > results/3-dedup/ChIP_rep2_treat.dedup.log 2>&1
+----------------------
+samtools index results/3-dedup/ChIP_rep2_treat.dedup.bam
+----------------------
+module load macs
+----------------------
+macs2 callpeak
+  -t results/3-dedup/ChIP_rep1_treat.dedup.bam
+  -c results/3-dedup/ChIP_rep1_input.dedup.bam
+  -f BAM
+  -g hs
+  -n ChIP_rep1
+  -B
+  -q 0.01
+  --outdir results/4-peak_calling
+----------------------
+module load macs
+----------------------
+macs2 callpeak
+  -t results/3-dedup/ChIP_rep2_treat.dedup.bam
+  -c results/3-dedup/ChIP_rep2_input.dedup.bam
+  -f BAM
+  -g hs
+  -n ChIP_rep2
+  -B
+  -q 0.01
+  --outdir results/4-peak_calling
+----------------------
+module load deeptools/3.5.6
+----------------------
+module load deeptools/3.5.6
+----------------------
+module load deeptools/3.5.6
+----------------------
+module load deeptools/3.5.6
+----------------------
+module load ucsc
+----------------------
+module load ucsc
+----------------------
