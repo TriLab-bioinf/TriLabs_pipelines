@@ -11,26 +11,13 @@ Note: This should be done only once.
 
 ### 2- Download the RNAseq pipeline by running the  following command in your WD:
 ```
-git clone https://github.com/TriLab-bioinf/GUYDOSH_LAB_TK_196.git 
-
-mv GUYDOSH_LAB_TK_196 RNAseq_pipeline
-
-cd RNAseq_pipeline
+git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/RNA-Seq
 ```
 
 ### 3- Copy Biowulf Snakemake profile in your RNAseq_pipeline directory
 ```
-git clone https://github.com/NIH-HPC/snakemake_profile.git
-```
-
-### 4- Copy Biowulf Snakemake profile in RNAseq_pipeline/config directory
-```
-# Download the biowulf snakemake profile from GitHub
-git clone https://github.com/NIH-HPC/snakemake_profile.git
-
-# Move nakemake_profile into the config directory
-mv snakemake_profile ./config/
-```
+git clone https://github.com/NIH-HPC/snakemake_profile.git config/snakemake_profile
+``` 
 
 ### Now you should be ready to run the RNAseq pipeline 
 
