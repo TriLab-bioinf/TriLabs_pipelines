@@ -16,7 +16,7 @@ git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
   && cd TriLabs_pipelines \
   && git sparse-checkout init --cone \
   && git sparse-checkout set ATAC-Seq \
-  && git checkout main
+  && git checkout main \
   && cd ATAC-Seq
 ```
 
