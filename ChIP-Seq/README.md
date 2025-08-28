@@ -12,12 +12,7 @@ Note: This should be done only once.
 
 ### 2- Download the ChIP-Seq pipeline by running the  following command in your WD:
 ```
-git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
-  && cd TriLabs_pipelines \
-  && git sparse-checkout init --cone \
-  && git sparse-checkout set ChIP-Seq \
-  && git checkout main \
-  && cd ChIP-Seq
+git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd ChIP-Seq
 ```
 
 ### 3- Download the biowulf snakemake profile from GitHub to ChIP-Seq/config directory
