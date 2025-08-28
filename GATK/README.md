@@ -16,13 +16,12 @@ git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
   && cd TriLabs_pipelines \
   && git sparse-checkout init --cone \
   && git sparse-checkout set GATK \
-  && git checkout main
+  && git checkout main \
   && cd GATK
 ```
 
-### 3- Copy Biowulf Snakemake profile in GATK_pipeline/config directory
+### 3- Download the biowulf snakemake profile from GitHub to GATK/config directory
 ```
-# Download the biowulf snakemake profile from GitHub
 git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
 ```
 
