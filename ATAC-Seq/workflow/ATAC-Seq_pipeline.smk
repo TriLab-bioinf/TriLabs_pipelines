@@ -1,6 +1,6 @@
 # vim: set ft=python:
 
-# ChIP-Seq Single-end workflow v1.0
+# ATAC-Seq Paired-end workflow v1.0
 # Yuejun Wang
 # yuejun.wang@nih.gov
 # Workflow requires to configure the config.yml file accordingly to include all metadatata required.
