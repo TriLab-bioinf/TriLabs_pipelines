@@ -23,10 +23,7 @@ git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
 ### 3- Copy Biowulf Snakemake profile in GATK_pipeline/config directory
 ```
 # Download the biowulf snakemake profile from GitHub
-git clone https://github.com/NIH-HPC/snakemake_profile.git
-
-# Move nakemake_profile into the config directory
-mv snakemake_profile ./config/
+git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
 ```
 
 ### Now you should be ready to run the GATK pipeline 
