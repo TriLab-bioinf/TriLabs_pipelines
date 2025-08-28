@@ -1,8 +1,8 @@
-# How to run the ATAC-seq pipeline 
+# How to run the ATAC-Seq pipeline 
 
-![](ATAC-seq.png)
+![](ATAC-Seq.png)
 
-**Figure 1:** Schematic representation of the Snakemake ATAC-seq pipeline
+**Figure 1:** Schematic representation of the Snakemake ATAC-Seq pipeline
 
 ## A. Setup the pipeline for the first time:
 
@@ -10,7 +10,7 @@ Note: This should be done only once.
 
 ### 1- Start an interactive session in Biowulf and go to your working directory (WD). 
 
-### 2- Download the ATAC-seq pipeline by running the  following command in your WD:
+### 2- Download the ATAC-Seq pipeline by running the  following command in your WD:
 ```
 git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
   && cd TriLabs_pipelines \
@@ -27,7 +27,7 @@ git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_pr
 
 ### Now you should be ready to run the ATAC-Seq pipeline 
 
-## B. Running the ATAC-seq pipeline in Biowulf
+## B. Running the ATAC-Seq pipeline in Biowulf
 
 ### 1- Within the config directory do the following:
 
@@ -46,22 +46,22 @@ source ~/bin/myconda
 
 ### 4.a- To run the Snakemake pipeline to process sequencing data locally (dry-run)
 ```
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/ATAC-seq_pipeline.smk -p -n
+snakemake --profile ./config/snakemake_profile --snakefile ./workflow/ATAC-Seq_pipeline.smk -p -n
 ```
 
 ### 4.b- To run the Snakemake pipeline to process sequencing data locally
 ```
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/ATAC-seq_pipeline.smk -p
+snakemake --profile ./config/snakemake_profile --snakefile ./workflow/ATAC-Seq_pipeline.smk -p
 ```
 
 ### 4.c- To run the Snakemake pipeline to process sequencing data in a cluster machine (best option)
 ```
-sbatch run_snakemake.sh ./workflow/ATAC-seq_pipeline.smk
+sbatch run_snakemake.sh ./workflow/ATAC-Seq_pipeline.smk
 ```
 
 ### 5- To fetch the shell commands ran by the snakemake pipeline use the following command
 ```
-bash print_snakemake_shell_commands.sh -c module,trimmomatic,bowtie,samtools,picard,macs,ucsc,deeptools,multiqc -p workflow/ATAC-seq_pipeline.smk
+bash print_snakemake_shell_commands.sh -c module,trimmomatic,bowtie,samtools,picard,macs,ucsc,deeptools,multiqc -p workflow/ATAC-Seq_pipeline.smk
 ```
 The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
 
