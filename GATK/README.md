@@ -12,11 +12,11 @@ Note: This should be done only once.
 
 ### 2- Download the GATK pipeline by running the  following command in your WD:
 ```
-git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git
-
-mv TriLabs_pipelines/GATK/ GATK_pipeline
-
-cd GATK_pipeline
+git clone --no-checkout https://github.com/TriLab-bioinf/TriLabs_pipelines.git \
+  && cd TriLabs_pipelines \
+  && git sparse-checkout init --cone \
+  && git sparse-checkout set GATK \
+  && git checkout main
 ```
 
 ### 3- Copy Biowulf Snakemake profile in GATK_pipeline/config directory
