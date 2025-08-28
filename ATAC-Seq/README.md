@@ -12,7 +12,7 @@ Note: This should be done only once.
 
 ### 2- Download the ATAC-Seq pipeline by running the  following command in your WD:
 ```
-git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd ATAC-Seq
+git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/ATAC-Seq
 ```
 
 ### 3- Download the biowulf snakemake profile from GitHub to ATAC-Seq/config directory
