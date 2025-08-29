@@ -13,28 +13,32 @@ reference:
 
 # 3. STAR DATABASE    
 stardb:
-    # Path to STAR database (e.g data/stardb/ .Set star_db: None if a new db has to be generated)
+    # Path to STAR database (e.g "data/stardb" . Set star_db to "None" if a new db has to be generated)
     path: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/STARindex
     # Overhang value for database generation (read length - 1)
     sjdbOverhang: 50 
 
-# 4. READ FILES
-# Path to raw reads directory (fastq files) 
-reads: data/test
-# Set paired to False if single-end reads are used
-paired: False
+# 4. STAR ALIGNMENT
+# Set spliced_alignment to False if not using spliced alignment (for instance for bacterial or lower eukaryote genomes)
+spliced_alignment: True
 
-# 5. TRIMMING
+# 5. READ FILES
+# Path to raw reads directory (fastq files) 
+reads: data/reads
+# Set paired to False if single-end reads are used
+paired: True
+
+# 6. TRIMMING
 # Perform trimming [True, False]
 trimming: True
 # Path to trimming adapters file
 adapters: data/adapters/adapters.fa
 
-# 6. DUPLICATED READS
+# 7. DUPLICATED READS
 # Flag duplicated reads [True, False]
 flag_dup: True
 
-# 7. READ COUNTS
+# 8. READ COUNTS
 # feaureCount parameters description
     # -p = count fragments instead of individual reads (assumes paired-end reads)
     # -M = include multi-mapping reads 
@@ -54,7 +58,7 @@ feat_counts_param: "-t CDS -g gene_id -O -s 0 -J -R BAM -M --fraction -p"
 # Count [True] / ignore [False] reads that were flagged as duplicated 
 count_duplicates: False
 
-# 8. BIGWIG FILES
+# 9. BIGWIG FILES
 # Make bigwig files from bam files
     # bw_bin: --binSize = Size of the bins
     # bw_normalization: --normalizeUsing = [RPKM,CPM,BPM,RPGC,None]
