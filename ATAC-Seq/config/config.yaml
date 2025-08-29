@@ -1,30 +1,40 @@
 ## Metadata
 
+# 1. METADATA FILE
 # Path to sample file
 metadata: ./config/samplesheet.csv
 
-# Genome reference info
+# 2. GENOME REFERENCE INFORMATION
 reference:  
-    # Path to annotation file in gtf format
-    gtf: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/gtf/Homo_sapiens.GRCh38.110.gtf
     # Path to reference genome in fasta format
-    fasta: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/fasta/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+    fasta: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa
     # Chromosome length
-    idx: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/STARindex/chrNameLength.txt
+    idx: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes
     # Genome size for macs2 callpeak
     gsize: hs
 
-# bowtie database    
+# 3. BOWTIE DATABASE    
 bowtiedb: 
     # Path to bowtie2 database (set bowtie_db: None if a new db has to be generated)
-    path: None
-    
-# Path to trimming adapters file
-adapters: /usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa
+    path: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index
 
-# Flag duplicated reads [true, false]
+# 4. READ FILES
+# Path to raw reads directory (fastq files) 
+reads: data/reads
+# Set paired to False if single-end reads are used
+paired: True
+
+# 5. TRIMMING
+# Perform trimming [True, False]
+trimming: True
+# Path to trimming adapters file
+adapters: data/adapters/adapters.fa
+
+# 6. DUPLICATED READS
+# Flag duplicated reads [True, False]
 flag_dup: True
 
+# 7. BIGWIG FILES
 # Make bigwig files from bam files
     # bw_bin: --binSize = Size of the bins
     # bw_normalization: --normalizeUsing = [RPKM,CPM,BPM,RPGC,None]
