@@ -12,5 +12,5 @@
 #
 # Sample sheet for Illumina sequencing
 sample_ID,fastq_1,fastq_2
-SINGLE_1,sample_1_R1.fastq.gz,sample_1_R2.fastq.gz
-SINGLE_2,sample_2_R1.fastq.gz,sample_2_R2.fastq.gz
+SAMPLE_1,sample_1_R1.fastq.gz,sample_1_R2.fastq.gz
+SAMPLE_2,sample_2_R1.fastq.gz,sample_2_R2.fastq.gz
