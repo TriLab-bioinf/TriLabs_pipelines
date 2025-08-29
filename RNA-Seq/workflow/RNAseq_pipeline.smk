@@ -23,7 +23,7 @@ metadata = pd.read_csv(config["metadata"], comment='#', sep=',', header=0, dtype
 # Create dictionaries from metadata for @RG line
 # metadata is imported from ./config/samplesheet.csv file
 fq_1: dict = {s:fq1 for s, fq1 in zip(metadata['sample_ID'], metadata['fastq_1'])}
-fq_2: dict = {s:fq2 for s, fq2 in zip(metadata['sample_ID'], metadata['fastq_2'])}
+fq_2: dict = {s:fq2 for s, fq2 in zip(metadata['sample_ID'], metadata['fastq_2'])} if config["paired"] == True else {}
 samples: list = list(metadata['sample_ID'])
 
 # Set what rules to run locally

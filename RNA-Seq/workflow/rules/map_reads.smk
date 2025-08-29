@@ -41,7 +41,13 @@ else:
 rule map_reads:
     input:
         fq1 = lambda wildcards: [f"results/1-trim/{wildcards.sample}.P.R1.fastq.gz" if (config["trimming"] == True) else f"data/reads/{fq_1[wildcards.sample]}"],
-        fq2 = lambda wildcards: [f"results/1-trim/{wildcards.sample}.P.R2.fastq.gz" if (config["trimming"] == True) else f"data/reads/{fq_2[wildcards.sample]}"],
+        fq2 = lambda wildcards: (
+                [
+                    f"results/1-trim/{wildcards.sample}.P.R2.fastq.gz" if (config["trimming"] == True) else f"data/reads/{fq_2[wildcards.sample]}"
+                ]
+                if config["paired"] == True
+                else []
+            ),
         db = lambda wildcards: rules.make_star_db.output.db if ((stardb_path == "None") and (not os.path.exists("data/stardb/SA"))) else []
     output: 
         bam = "results/2-map_reads/{sample}.Aligned.sortedByCoord.out.bam",
