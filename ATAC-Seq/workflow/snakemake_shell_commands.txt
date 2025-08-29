@@ -1,46 +1,15 @@
-module load trimmomatic
-----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/atac_rep1_R1.fastq.gz                 data/reads/atac_rep1_R2.fastq.gz                 results/1-trim/atac_rep1_R1.paired.fastq.gz                 results/1-trim/atac_rep1_R1.unpaired.fastq.gz                 results/1-trim/atac_rep1_R2.paired.fastq.gz                 results/1-trim/atac_rep1_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/atac_rep1.log 2>&1
-----------------------
-module load trimmomatic
-----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/atac_rep2_R1.fastq.gz                 data/reads/atac_rep2_R2.fastq.gz                 results/1-trim/atac_rep2_R1.paired.fastq.gz                 results/1-trim/atac_rep2_R1.unpaired.fastq.gz                 results/1-trim/atac_rep2_R2.paired.fastq.gz                 results/1-trim/atac_rep2_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > results/1-trim/atac_rep2.log 2>&1
-----------------------
 module load bowtie samtools
 ----------------------
 bowtie2
-  -x data/bowtiedb/genome        
-  --threads 1        
-  --phred33        
-  --rg-id atac_rep1
-  --rg SM:atac_rep1
-  --rg LB:library
-  --rg PL:ILLUMINA        
-  -1 results/1-trim/atac_rep1_R1.paired.fastq.gz 
-  -2 results/1-trim/atac_rep1_R2.paired.fastq.gz        
-  --sensitive | samtools sort
-  -@ 8
-  -O BAM
-  -o results/2-map_reads/atac_rep1.bam
-  -
-----------------------
-samtools index
-  -@ 8 results/2-map_reads/atac_rep1.bam
-----------------------
-module load bowtie samtools
-----------------------
-bowtie2
-  -x data/bowtiedb/genome        
+  -x /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome        
   --threads 1        
   --phred33        
   --rg-id atac_rep2
   --rg SM:atac_rep2
   --rg LB:library
   --rg PL:ILLUMINA        
-  -1 results/1-trim/atac_rep2_R1.paired.fastq.gz 
-  -2 results/1-trim/atac_rep2_R2.paired.fastq.gz        
+  -1 results/1-trim/atac_rep2.P.R1.fastq.gz
+  -2 results/1-trim/atac_rep2.P.R2.fastq.gz        
   --sensitive | samtools sort
   -@ 8
   -O BAM
@@ -49,6 +18,27 @@ bowtie2
 ----------------------
 samtools index
   -@ 8 results/2-map_reads/atac_rep2.bam
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome        
+  --threads 1        
+  --phred33        
+  --rg-id atac_rep1
+  --rg SM:atac_rep1
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -1 results/1-trim/atac_rep1.P.R1.fastq.gz
+  -2 results/1-trim/atac_rep1.P.R2.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/atac_rep1.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/atac_rep1.bam
 ----------------------
 module load picard samtools
 ----------------------
@@ -84,6 +74,8 @@ samtools index results/3-dedup/atac_rep2.dedup.bam
 ----------------------
 module load deeptools/3.5.6
 ----------------------
+module load deeptools/3.5.6
+----------------------
 module load macs
 ----------------------
 macs2 callpeak
@@ -106,9 +98,15 @@ macs2 callpeak
   -q 0.01
   --outdir results/4-peak_calling
 ----------------------
-module load deeptools/3.5.6
+module load ucsc
+----------------------
+bedGraphToBigWig results/4-peak_calling/atac_rep2_control_lambda.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep2_control_lambda.bw
+----------------------
+bedGraphToBigWig results/4-peak_calling/atac_rep2_treat_pileup.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep2_treat_pileup.bw
 ----------------------
 module load ucsc
 ----------------------
-module load ucsc
+bedGraphToBigWig results/4-peak_calling/atac_rep1_control_lambda.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep1_control_lambda.bw
+----------------------
+bedGraphToBigWig results/4-peak_calling/atac_rep1_treat_pileup.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep1_treat_pileup.bw
 ----------------------
