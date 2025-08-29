@@ -1,4 +1,20 @@
+
 # Map reads to reference with STAR
+
+# Function to calculate genome length from a fasta file
+import os
+from math import log2
+def calculate_genome_length(fasta_path):
+    length = 0
+    if not os.path.exists(fasta_path):
+        raise FileNotFoundError(f"Fasta file not found: {fasta_path}")
+    with open(fasta_path, 'r') as f:
+        for line in f:
+            if not line.startswith('>'):
+                length += len(line.strip())
+    return length
+
+genomeSAindexNbases = min(log2(calculate_genome_length(genome)) / 2, 14)
 
 # Set STARdb path and check if STARdb already exists, otherwise create one
 if (stardb_path == "None") and (not os.path.exists("data/stardb/SA")):
@@ -16,7 +32,8 @@ if (stardb_path == "None") and (not os.path.exists("data/stardb/SA")):
             disk_mb= 1024 * 20
         threads: 16
         params: so = f"{stardb_overhang}",
-                db_dir = "data/stardb"
+                db_dir = "data/stardb",
+                small_genome = f"--genomeSAindexNbases {genomeSAindexNbases}" # FOR BACTERIAL (SMALL) GENOMES
         shell:
             """
             module load STAR/2.7.11b
@@ -26,7 +43,7 @@ if (stardb_path == "None") and (not os.path.exists("data/stardb/SA")):
             --genomeFastaFiles {input.gen} \
             --sjdbGTFfile {input.ann} \
             --runThreadN {threads} \
-            --sjdbOverhang {params.so}
+            --sjdbOverhang {params.so} {params.small_genome}
 
             touch {output.db}  
             """
@@ -62,7 +79,8 @@ rule map_reads:
         "benchmarks/2-map_reads/{sample}.bwa.tsv"
     params: 
         stardb_dir = f"{db_path}",
-        prefix = "results/2-map_reads/{sample}."
+        prefix = "results/2-map_reads/{sample}.",
+        spliced_alignment = "--alignIntronMax 1" if config["spliced_alignment"] == False else ""
     log: 
         logfile = "logs/2-map_reads/{sample}.star.log"
     shell:
@@ -78,7 +96,7 @@ rule map_reads:
                 --alignEndsType EndToEnd \
                 --readFilesIn {input.fq1} {input.fq2} \
                 --readFilesCommand zcat \
-                --outFileNamePrefix {params.prefix} \
+                --outFileNamePrefix {params.prefix} {params.spliced_alignment} \
                 --quantMode GeneCounts \
                 --outSAMtype BAM SortedByCoordinate \
                 --outSAMattrRGline ID:$$ SM:{wildcards.sample} PL:ILLUMINA \
