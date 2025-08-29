@@ -1,34 +1,42 @@
 ## Metadata
 
+# 1. METADATA FILE
 # Path to sample file
 metadata: ./config/samplesheet.csv
 
-# Genome reference info
+# 2. GENOME REFERENCE INFORMATION
 reference:  
     # Path to annotation file in gtf format
     gtf: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/gtf/Homo_sapiens.GRCh38.110.gtf
     # Path to reference genome in fasta format
     fasta: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/fasta/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa
 
-# STAR database    
+# 3. STAR DATABASE    
 stardb:
     # Path to STAR database (e.g data/stardb/ .Set star_db: None if a new db has to be generated)
-    path: None
+    path: /fdb/igenomes_nf/Homo_sapiens/Ensembl/pub/release-110/STARindex
     # Overhang value for database generation (read length - 1)
     sjdbOverhang: 50 
 
-# Path to raw reads directory (fastq files) 
-reads: /data/Guydoshlab/insulin_share/rnaseq
 
+# 4. READ FILES
+# Path to raw reads directory (fastq files) 
+reads: data/test
+# Set paired to False if single-end reads are used
+paired: False
+
+# 5. TRIMMING
 # Perform trimming [True, False]
 trimming: True
 # Path to trimming adapters file
 adapters: data/adapters/adapters.fa
 
+# 6. DUPLICATED READS
 # Flag duplicated reads [True, False]
 flag_dup: True
 
-# feaureCount parameters
+# 7. READ COUNTS
+# feaureCount parameters description
     # -p = count fragments instead of individual reads (assumes paired-end reads)
     # -M = include multi-mapping reads 
     # -O count reads mapping overlapping features
@@ -37,14 +45,22 @@ flag_dup: True
     # --ignoreDup = Ignore reads flagged as duplicated
     # -t = annotation feature to be counted [gene, exon, CDS, other available features in the gtf file]
     # -g = gtf field from the comment column in the gtf file to use as ID 
-feat_counts_param: "-t CDS -g gene_id -O -s 2 -J -R BAM -M --fraction -p --ignoreDup"
-    # Count [True]/ ignore [False] reads that were flagged as duplicated 
+
+# featureCount parameters recommended for paired-end reads
+feat_counts_param: "-t CDS -g gene_id -O -s 0 -J -R BAM -M --fraction -p"
+
+# featureCount parameters recommended for single-end reads
+# feat_counts_param: "-t CDS -g gene_id -O -s 0 -J -R BAM -M --fraction"
+
+# Count [True] / ignore [False] reads that were flagged as duplicated 
 count_duplicates: False
+
+# 8. BIGWIG FILES
 # Make bigwig files from bam files
     # bw_bin: --binSize = Size of the bins
     # bw_normalization: --normalizeUsing = [RPKM,CPM,BPM,RPGC,None]
     # bw_ignire_dup: --ignoreDuplicates
-bw_bin: 10
+bw_bin: 5
 bw_normalization: "BPM"
 bw_ignore_dup: True
 
