@@ -18,7 +18,6 @@ stardb:
     # Overhang value for database generation (read length - 1)
     sjdbOverhang: 50 
 
-
 # 4. READ FILES
 # Path to raw reads directory (fastq files) 
 reads: data/test
