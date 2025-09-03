@@ -11,7 +11,7 @@
 # @Hxxxxxx - NovaSeq S1/S2/S4,,
 #,,
 # Sample sheet for Illumina sequencing,,
-sample,type,fastq_1
+sample_ID,type,fastq_1
 ChIP_rep1,treat,rep1.fastq.gz
 ChIP_rep1,input,ctl1.fastq.gz
 ChIP_rep2,treat,rep2.fastq.gz
