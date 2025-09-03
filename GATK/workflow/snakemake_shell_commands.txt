@@ -1,3 +1,93 @@
+trimming_fastp             4
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/NA19913_ERR250967_1.filt.fastq.gz        
+  --out1 results/1-trim/NA19913_ERR250967.P.R1.fastq.gz        
+  --failed_out results/1-trim/NA19913_ERR250967.failed.fastq.gz        
+  --html results/1-trim/NA19913_ERR250967.fastp.html        
+  --json results/1-trim/NA19913_ERR250967.fastp.json
+  --in2 data/reads/NA19913_ERR250967_2.filt.fastq.gz
+  --out2 results/1-trim/NA19913_ERR250967.P.R2.fastq.gz
+  --unpaired1  results/1-trim/NA19913_ERR250967.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/NA19913_ERR250967.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/NA19913_ERR250967.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/NA20274_ERR250969_1.filt.fastq.gz        
+  --out1 results/1-trim/NA20274_ERR250969.P.R1.fastq.gz        
+  --failed_out results/1-trim/NA20274_ERR250969.failed.fastq.gz        
+  --html results/1-trim/NA20274_ERR250969.fastp.html        
+  --json results/1-trim/NA20274_ERR250969.fastp.json
+  --in2 data/reads/NA20274_ERR250969_2.filt.fastq.gz
+  --out2 results/1-trim/NA20274_ERR250969.P.R2.fastq.gz
+  --unpaired1  results/1-trim/NA20274_ERR250969.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/NA20274_ERR250969.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/NA20274_ERR250969.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/NA20274_ERR250968_1.filt.fastq.gz        
+  --out1 results/1-trim/NA20274_ERR250968.P.R1.fastq.gz        
+  --failed_out results/1-trim/NA20274_ERR250968.failed.fastq.gz        
+  --html results/1-trim/NA20274_ERR250968.fastp.html        
+  --json results/1-trim/NA20274_ERR250968.fastp.json
+  --in2 data/reads/NA20274_ERR250968_2.filt.fastq.gz
+  --out2 results/1-trim/NA20274_ERR250968.P.R2.fastq.gz
+  --unpaired1  results/1-trim/NA20274_ERR250968.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/NA20274_ERR250968.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/NA20274_ERR250968.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/NA19913_ERR250256_1.filt.fastq.gz        
+  --out1 results/1-trim/NA19913_ERR250256.P.R1.fastq.gz        
+  --failed_out results/1-trim/NA19913_ERR250256.failed.fastq.gz        
+  --html results/1-trim/NA19913_ERR250256.fastp.html        
+  --json results/1-trim/NA19913_ERR250256.fastp.json
+  --in2 data/reads/NA19913_ERR250256_2.filt.fastq.gz
+  --out2 results/1-trim/NA19913_ERR250256.P.R2.fastq.gz
+  --unpaired1  results/1-trim/NA19913_ERR250256.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/NA19913_ERR250256.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/NA19913_ERR250256.log 2>&1
+----------------------
 module load bwa-mem2/2.2.1 samtools/1.21
 ----------------------
 bwa-mem2 mem data/bwadb//genome.fa         results/1-trim/NA19913_ERR250256.P.R1.fastq.gz results/1-trim/NA19913_ERR250256.P.R2.fastq.gz        
@@ -374,4 +464,8 @@ gatk
   --truth-sensitivity-filter-level 99.9          
   --create-output-variant-index true          
   -O results/7-filtered_vcf/all.wgs.indel.SNP.recalibrated_99.9.vcf.gz >> logs/7-filtered_vcf/all.wgs.apply_vqsr.log 2>&1
+----------------------
+trimming_fastp             4
+----------------------
+trimming_fastp
 ----------------------
