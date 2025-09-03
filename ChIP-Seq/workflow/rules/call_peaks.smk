@@ -32,8 +32,9 @@ rule bigwig:
     shell:
         """
         module load ucsc
-      
-        bedGraphToBigWig {input.control} {params.idx} {output.control_bw}
-        bedGraphToBigWig {input.chip} {params.idx} {output.chip_bw}
+        
+        cut -f1,2 {params.idx} > data/chrom.sizes
+        bedGraphToBigWig {input.control} data/chrom.sizes {output.control_bw}
+        bedGraphToBigWig {input.chip} data/chrom.sizes {output.chip_bw}
   
         """

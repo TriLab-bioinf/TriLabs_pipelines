@@ -33,7 +33,14 @@ else:
 # Mapping reads to reference
 rule map_reads:
     input:
-        fq1 = "results/1-trim/{sample}_{type}.trimmed.fastq.gz",
+        fq1 = lambda wildcards: [f"results/1-trim/{wildcards.sample}_{wildcards.type}.P.R1.fastq.gz" if (config["trimming"] == True) else f"{reads_dir}/{get_fastq(wildcards.sample, wildcards.type,'fastq_1')}"],
+        fq2 = lambda wildcards: (
+                [
+                    f"results/1-trim/{wildcards.sample}_{wildcards.type}.P.R2.fastq.gz" if (config["trimming"] == True) else f"{reads_dir}/{get_fastq(wildcards.sample, wildcards.type,'fastq_2')}"
+                ]
+                if config["paired"] == True
+                else []
+            ),
         db = lambda wildcards: rules.make_bowtie_index.output.db if ((bowtiedb_path == "None") and (not os.path.exists("data/bowtiedb/genome"))) else []
     output: 
         bam = "results/2-map_reads/{sample}_{type}.bam",
@@ -49,13 +56,13 @@ rule map_reads:
     params: 
         prefix = "{sample}_{type}",
         bowtiedb_dir = f"{db_path}",
-        db_base = "data/bowtiedb/genome"
+        db_base = "genome"
     log: "logs/2-map_reads/{sample}_{type}.bowtie2.log"        
     shell:
         """
         module load bowtie samtools
 
-        bowtie2 -x {params.db_base} \
+        bowtie2 -x {params.bowtiedb_dir}/{params.db_base} \
         --threads {threads} \
         --phred33 \
         --rg-id {params.prefix} --rg SM:{params.prefix} --rg LB:library --rg PL:ILLUMINA \
