@@ -56,7 +56,7 @@ sbatch run_snakemake.sh ./workflow/GATK_pipeline.smk
 
 ### 5- To fetch the shell commands ran by the snakemake pipeline use the following command
 ```
-bash print_snakemake_shell_commands.sh -c module,trimmomatic,bwa,samtools,picard,GATK,multiqc -p workflow/GATK_pipeline.smk
+bash print_snakemake_shell_commands.sh -c module,fastp,bwa-mem2,samtools,picard,GATK,multiqc -p workflow/GATK_pipeline.smk
 ```
 The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
 
