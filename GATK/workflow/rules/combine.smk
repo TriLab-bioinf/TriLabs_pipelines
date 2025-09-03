@@ -1,7 +1,7 @@
 rule combine_calls:
   input:
       ref=f"{genome}",
-      gvcfs=expand("results/5-vcf/{sample}.raw.g.vcf.gz", sample=metadata["sample"])
+      gvcfs=expand("results/5-vcf/{sample}.raw.g.vcf.gz", sample=samples)
   output:
       gvcf="results/6-merged/all.wgs.g.vcf.gz"
   threads: 16

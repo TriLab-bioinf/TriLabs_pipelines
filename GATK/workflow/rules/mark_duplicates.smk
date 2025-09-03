@@ -22,7 +22,7 @@ rule mark_duplicates:
         gres = "lscratch:80"
     shell:
         """
-        module load GATK/4.6.0.0 samtools/1.21
+        module load GATK/4.6.0.0
 
         gatk MarkDuplicates \
          -I {input.bam} \
@@ -30,6 +30,4 @@ rule mark_duplicates:
          -M {output.metrics} \
          {params} \
          --TMP_DIR {output.tmpdir} > {log.logfile} 2>&1
-
-        samtools index {output.dedupbam}
         """

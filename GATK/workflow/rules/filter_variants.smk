@@ -34,6 +34,8 @@ rule VariantRecalibrator:
           /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz \
           --resource:1000G,known=false,training=true,truth=false,prior=10.0 \
           /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz \
+          -resource:dbsnp,known=false,training=true,truth=false,prior=10.0 \
+          /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz \
           -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR \
           -mode SNP -O {output.SNP_recal} --tranches-file {output.SNP_tranches} \
           --rscript-file {output.SNP_Rscript} > {log.logfile} 2>&1
