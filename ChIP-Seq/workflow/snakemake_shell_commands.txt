@@ -1,3 +1,95 @@
+module load fastp
+----------------------
+fastp
+  -i data/reads/ctl2.fastq.gz        
+  --out1 results/1-trim/ChIP_rep2_input.P.R1.fastq.gz        
+  --failed_out results/1-trim/ChIP_rep2_input.failed.fastq.gz        
+  --html results/1-trim/ChIP_rep2_input.fastp.html        
+  --json results/1-trim/ChIP_rep2_input.fastp.json    
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 20
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/ChIP_rep2_input.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/ctl1.fastq.gz        
+  --out1 results/1-trim/ChIP_rep1_input.P.R1.fastq.gz        
+  --failed_out results/1-trim/ChIP_rep1_input.failed.fastq.gz        
+  --html results/1-trim/ChIP_rep1_input.fastp.html        
+  --json results/1-trim/ChIP_rep1_input.fastp.json    
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 20
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/ChIP_rep1_input.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/rep2.fastq.gz        
+  --out1 results/1-trim/ChIP_rep2_treat.P.R1.fastq.gz        
+  --failed_out results/1-trim/ChIP_rep2_treat.failed.fastq.gz        
+  --html results/1-trim/ChIP_rep2_treat.fastp.html        
+  --json results/1-trim/ChIP_rep2_treat.fastp.json    
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 20
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/ChIP_rep2_treat.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/rep1.fastq.gz        
+  --out1 results/1-trim/ChIP_rep1_treat.P.R1.fastq.gz        
+  --failed_out results/1-trim/ChIP_rep1_treat.failed.fastq.gz        
+  --html results/1-trim/ChIP_rep1_treat.fastp.html        
+  --json results/1-trim/ChIP_rep1_treat.fastp.json    
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 20
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/ChIP_rep1_treat.log 2>&1
+----------------------
+module load bowtie samtools
+----------------------
+bowtie2
+  -x /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome        
+  --threads 1        
+  --phred33        
+  --rg-id ChIP_rep1_input
+  --rg SM:ChIP_rep1_input
+  --rg LB:library
+  --rg PL:ILLUMINA        
+  -U results/1-trim/ChIP_rep1_input.P.R1.fastq.gz        
+  --sensitive | samtools sort
+  -@ 8
+  -O BAM
+  -o results/2-map_reads/ChIP_rep1_input.bam
+  -
+----------------------
+samtools index
+  -@ 8 results/2-map_reads/ChIP_rep1_input.bam
+----------------------
 module load bowtie samtools
 ----------------------
 bowtie2
@@ -58,26 +150,6 @@ bowtie2
 samtools index
   -@ 8 results/2-map_reads/ChIP_rep1_treat.bam
 ----------------------
-module load bowtie samtools
-----------------------
-bowtie2
-  -x /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/Bowtie2Index/genome        
-  --threads 1        
-  --phred33        
-  --rg-id ChIP_rep1_input
-  --rg SM:ChIP_rep1_input
-  --rg LB:library
-  --rg PL:ILLUMINA        
-  -U results/1-trim/ChIP_rep1_input.P.R1.fastq.gz        
-  --sensitive | samtools sort
-  -@ 8
-  -O BAM
-  -o results/2-map_reads/ChIP_rep1_input.bam
-  -
-----------------------
-samtools index
-  -@ 8 results/2-map_reads/ChIP_rep1_input.bam
-----------------------
 module load picard samtools
 ----------------------
 java
@@ -85,14 +157,14 @@ java
   -Xms80g
   -XX:ParallelGCThreads=24
   -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
-  -I results/2-map_reads/ChIP_rep1_treat.bam         
-  -O results/3-dedup/ChIP_rep1_treat.dedup.bam         
-  -M results/3-dedup/ChIP_rep1_treat.metrics.txt         
+  -I results/2-map_reads/ChIP_rep2_input.bam         
+  -O results/3-dedup/ChIP_rep2_input.dedup.bam         
+  -M results/3-dedup/ChIP_rep2_input.metrics.txt         
   --READ_NAME_REGEX null
   --REMOVE_DUPLICATES false         
-  --TMP_DIR results/3-dedup/ChIP_rep1_treat.tmp > results/3-dedup/ChIP_rep1_treat.dedup.log 2>&1
+  --TMP_DIR results/3-dedup/ChIP_rep2_input.tmp > results/3-dedup/ChIP_rep2_input.dedup.log 2>&1
 ----------------------
-samtools index results/3-dedup/ChIP_rep1_treat.dedup.bam
+samtools index results/3-dedup/ChIP_rep2_input.dedup.bam
 ----------------------
 module load picard samtools
 ----------------------
@@ -117,14 +189,14 @@ java
   -Xms80g
   -XX:ParallelGCThreads=24
   -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
-  -I results/2-map_reads/ChIP_rep2_treat.bam         
-  -O results/3-dedup/ChIP_rep2_treat.dedup.bam         
-  -M results/3-dedup/ChIP_rep2_treat.metrics.txt         
+  -I results/2-map_reads/ChIP_rep1_treat.bam         
+  -O results/3-dedup/ChIP_rep1_treat.dedup.bam         
+  -M results/3-dedup/ChIP_rep1_treat.metrics.txt         
   --READ_NAME_REGEX null
   --REMOVE_DUPLICATES false         
-  --TMP_DIR results/3-dedup/ChIP_rep2_treat.tmp > results/3-dedup/ChIP_rep2_treat.dedup.log 2>&1
+  --TMP_DIR results/3-dedup/ChIP_rep1_treat.tmp > results/3-dedup/ChIP_rep1_treat.dedup.log 2>&1
 ----------------------
-samtools index results/3-dedup/ChIP_rep2_treat.dedup.bam
+samtools index results/3-dedup/ChIP_rep1_treat.dedup.bam
 ----------------------
 module load picard samtools
 ----------------------
@@ -133,14 +205,14 @@ java
   -Xms80g
   -XX:ParallelGCThreads=24
   -jar $PICARDJARPATH/picard.jar   MarkDuplicates         
-  -I results/2-map_reads/ChIP_rep2_input.bam         
-  -O results/3-dedup/ChIP_rep2_input.dedup.bam         
-  -M results/3-dedup/ChIP_rep2_input.metrics.txt         
+  -I results/2-map_reads/ChIP_rep2_treat.bam         
+  -O results/3-dedup/ChIP_rep2_treat.dedup.bam         
+  -M results/3-dedup/ChIP_rep2_treat.metrics.txt         
   --READ_NAME_REGEX null
   --REMOVE_DUPLICATES false         
-  --TMP_DIR results/3-dedup/ChIP_rep2_input.tmp > results/3-dedup/ChIP_rep2_input.dedup.log 2>&1
+  --TMP_DIR results/3-dedup/ChIP_rep2_treat.tmp > results/3-dedup/ChIP_rep2_treat.dedup.log 2>&1
 ----------------------
-samtools index results/3-dedup/ChIP_rep2_input.dedup.bam
+samtools index results/3-dedup/ChIP_rep2_treat.dedup.bam
 ----------------------
 module load macs
 ----------------------
