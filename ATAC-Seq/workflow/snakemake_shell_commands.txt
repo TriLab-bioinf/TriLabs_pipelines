@@ -1,3 +1,49 @@
+trimming_fastp         2
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/atac_rep1_R1.fastq.gz        
+  --out1 results/1-trim/atac_rep1.P.R1.fastq.gz        
+  --failed_out results/1-trim/atac_rep1.failed.fastq.gz        
+  --html results/1-trim/atac_rep1.fastp.html        
+  --json results/1-trim/atac_rep1.fastp.json
+  --in2 data/reads/atac_rep1_R2.fastq.gz
+  --out2 results/1-trim/atac_rep1.P.R2.fastq.gz
+  --unpaired1  results/1-trim/atac_rep1.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/atac_rep1.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/atac_rep1.log 2>&1
+----------------------
+module load fastp
+----------------------
+fastp
+  -i data/reads/atac_rep2_R1.fastq.gz        
+  --out1 results/1-trim/atac_rep2.P.R1.fastq.gz        
+  --failed_out results/1-trim/atac_rep2.failed.fastq.gz        
+  --html results/1-trim/atac_rep2.fastp.html        
+  --json results/1-trim/atac_rep2.fastp.json
+  --in2 data/reads/atac_rep2_R2.fastq.gz
+  --out2 results/1-trim/atac_rep2.P.R2.fastq.gz
+  --unpaired1  results/1-trim/atac_rep2.UP.R1.fastq.gz
+  --unpaired2 results/1-trim/atac_rep2.UP.R2.fastq.gz
+  --trim_poly_x
+  --poly_x_min_len 10
+  --qualified_quality_phred 20
+  --length_required 40
+  --adapter_fasta data/adapters/adapters.fa
+  --cut_right
+  --cut_right_mean_quality 20
+  --cut_right_window_size 5
+  --n_base_limit 2  > logs/1-trim/atac_rep2.log 2>&1
+----------------------
 module load bowtie samtools
 ----------------------
 bowtie2
@@ -109,4 +155,8 @@ module load ucsc
 bedGraphToBigWig results/4-peak_calling/atac_rep1_control_lambda.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep1_control_lambda.bw
 ----------------------
 bedGraphToBigWig results/4-peak_calling/atac_rep1_treat_pileup.bdg /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes results/4-peak_calling/atac_rep1_treat_pileup.bw
+----------------------
+trimming_fastp         2
+----------------------
+trimming_fastp
 ----------------------
