@@ -1,52 +1,6 @@
-module load trimmomatic
+module load bwa-mem2/2.2.1 samtools/1.21
 ----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/NA20274_ERR250968_1.filt.fastq.gz                 data/reads/NA20274_ERR250968_2.filt.fastq.gz                 results/1-trim/NA20274_ERR250968_R1.paired.fastq.gz                 results/1-trim/NA20274_ERR250968_R1.unpaired.fastq.gz                 results/1-trim/NA20274_ERR250968_R2.paired.fastq.gz                 results/1-trim/NA20274_ERR250968_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > logs/1-trim/NA20274_ERR250968.log 2>&1
-----------------------
-module load trimmomatic
-----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/NA19913_ERR250967_1.filt.fastq.gz                 data/reads/NA19913_ERR250967_2.filt.fastq.gz                 results/1-trim/NA19913_ERR250967_R1.paired.fastq.gz                 results/1-trim/NA19913_ERR250967_R1.unpaired.fastq.gz                 results/1-trim/NA19913_ERR250967_R2.paired.fastq.gz                 results/1-trim/NA19913_ERR250967_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > logs/1-trim/NA19913_ERR250967.log 2>&1
-----------------------
-module load trimmomatic
-----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/NA19913_ERR250256_1.filt.fastq.gz                 data/reads/NA19913_ERR250256_2.filt.fastq.gz                 results/1-trim/NA19913_ERR250256_R1.paired.fastq.gz                 results/1-trim/NA19913_ERR250256_R1.unpaired.fastq.gz                 results/1-trim/NA19913_ERR250256_R2.paired.fastq.gz                 results/1-trim/NA19913_ERR250256_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > logs/1-trim/NA19913_ERR250256.log 2>&1
-----------------------
-module load trimmomatic
-----------------------
-trimmomatic PE                
-  -threads 1                 data/reads/NA20274_ERR250969_1.filt.fastq.gz                 data/reads/NA20274_ERR250969_2.filt.fastq.gz                 results/1-trim/NA20274_ERR250969_R1.paired.fastq.gz                 results/1-trim/NA20274_ERR250969_R1.unpaired.fastq.gz                 results/1-trim/NA20274_ERR250969_R2.paired.fastq.gz                 results/1-trim/NA20274_ERR250969_R2.unpaired.fastq.gz                 ILLUMINACLIP:/usr/local/apps/trimmomatic/0.39/adapters/TruSeq3-PE.fa:2:30:12                 LEADING:0                 HEADCROP:0                 TRAILING:0                 SLIDINGWINDOW:4:20                 MINLEN:20 > logs/1-trim/NA20274_ERR250969.log 2>&1
-----------------------
-module load bwa/0.7.17 samtools/1.21
-----------------------
-bwa mem data/bwadb/genome         results/1-trim/NA20274_ERR250968_R1.paired.fastq.gz  results/1-trim/NA20274_ERR250968_R2.paired.fastq.gz        
-  -t 1        
-  -R '@RG\tID:NA20274_ERR250968\tSM:NA20274_ERR250968\tPL:ILLUMINA'         | samtools sort
-  -@ 1
-  -O BAM
-  -o results/2-map_reads/NA20274_ERR250968.bam
-  -
-----------------------
-samtools index
-  -@ 1 results/2-map_reads/NA20274_ERR250968.bam
-----------------------
-module load bwa/0.7.17 samtools/1.21
-----------------------
-bwa mem data/bwadb/genome         results/1-trim/NA20274_ERR250969_R1.paired.fastq.gz  results/1-trim/NA20274_ERR250969_R2.paired.fastq.gz        
-  -t 1        
-  -R '@RG\tID:NA20274_ERR250969\tSM:NA20274_ERR250969\tPL:ILLUMINA'         | samtools sort
-  -@ 1
-  -O BAM
-  -o results/2-map_reads/NA20274_ERR250969.bam
-  -
-----------------------
-samtools index
-  -@ 1 results/2-map_reads/NA20274_ERR250969.bam
-----------------------
-module load bwa/0.7.17 samtools/1.21
-----------------------
-bwa mem data/bwadb/genome         results/1-trim/NA19913_ERR250256_R1.paired.fastq.gz  results/1-trim/NA19913_ERR250256_R2.paired.fastq.gz        
+bwa-mem2 mem data/bwadb//genome.fa         results/1-trim/NA19913_ERR250256.P.R1.fastq.gz results/1-trim/NA19913_ERR250256.P.R2.fastq.gz        
   -t 1        
   -R '@RG\tID:NA19913_ERR250256\tSM:NA19913_ERR250256\tPL:ILLUMINA'         | samtools sort
   -@ 1
@@ -57,9 +11,9 @@ bwa mem data/bwadb/genome         results/1-trim/NA19913_ERR250256_R1.paired.fas
 samtools index
   -@ 1 results/2-map_reads/NA19913_ERR250256.bam
 ----------------------
-module load bwa/0.7.17 samtools/1.21
+module load bwa-mem2/2.2.1 samtools/1.21
 ----------------------
-bwa mem data/bwadb/genome         results/1-trim/NA19913_ERR250967_R1.paired.fastq.gz  results/1-trim/NA19913_ERR250967_R2.paired.fastq.gz        
+bwa-mem2 mem data/bwadb//genome.fa         results/1-trim/NA19913_ERR250967.P.R1.fastq.gz results/1-trim/NA19913_ERR250967.P.R2.fastq.gz        
   -t 1        
   -R '@RG\tID:NA19913_ERR250967\tSM:NA19913_ERR250967\tPL:ILLUMINA'         | samtools sort
   -@ 1
@@ -70,40 +24,33 @@ bwa mem data/bwadb/genome         results/1-trim/NA19913_ERR250967_R1.paired.fas
 samtools index
   -@ 1 results/2-map_reads/NA19913_ERR250967.bam
 ----------------------
-module load GATK/4.6.0.0 samtools/1.21
+module load bwa-mem2/2.2.1 samtools/1.21
 ----------------------
-gatk MarkDuplicates         
-  -I results/2-map_reads/NA19913_ERR250967.bam         
-  -O results/3-dedup/NA19913_ERR250967.dedup.bam         
-  -M results/3-dedup/NA19913_ERR250967.metrics.txt         
-  --CREATE_INDEX true         
-  --TMP_DIR results/3-dedup/NA19913_ERR250967.tmp > logs/3-dedup/NA19913_ERR250967.dedup.log 2>&1
+bwa-mem2 mem data/bwadb//genome.fa         results/1-trim/NA20274_ERR250968.P.R1.fastq.gz results/1-trim/NA20274_ERR250968.P.R2.fastq.gz        
+  -t 1        
+  -R '@RG\tID:NA20274_ERR250968\tSM:NA20274_ERR250968\tPL:ILLUMINA'         | samtools sort
+  -@ 1
+  -O BAM
+  -o results/2-map_reads/NA20274_ERR250968.bam
+  -
 ----------------------
-samtools index results/3-dedup/NA19913_ERR250967.dedup.bam
+samtools index
+  -@ 1 results/2-map_reads/NA20274_ERR250968.bam
 ----------------------
-module load GATK/4.6.0.0 samtools/1.21
+module load bwa-mem2/2.2.1 samtools/1.21
 ----------------------
-gatk MarkDuplicates         
-  -I results/2-map_reads/NA19913_ERR250256.bam         
-  -O results/3-dedup/NA19913_ERR250256.dedup.bam         
-  -M results/3-dedup/NA19913_ERR250256.metrics.txt         
-  --CREATE_INDEX true         
-  --TMP_DIR results/3-dedup/NA19913_ERR250256.tmp > logs/3-dedup/NA19913_ERR250256.dedup.log 2>&1
+bwa-mem2 mem data/bwadb//genome.fa         results/1-trim/NA20274_ERR250969.P.R1.fastq.gz results/1-trim/NA20274_ERR250969.P.R2.fastq.gz        
+  -t 1        
+  -R '@RG\tID:NA20274_ERR250969\tSM:NA20274_ERR250969\tPL:ILLUMINA'         | samtools sort
+  -@ 1
+  -O BAM
+  -o results/2-map_reads/NA20274_ERR250969.bam
+  -
 ----------------------
-samtools index results/3-dedup/NA19913_ERR250256.dedup.bam
+samtools index
+  -@ 1 results/2-map_reads/NA20274_ERR250969.bam
 ----------------------
-module load GATK/4.6.0.0 samtools/1.21
-----------------------
-gatk MarkDuplicates         
-  -I results/2-map_reads/NA20274_ERR250969.bam         
-  -O results/3-dedup/NA20274_ERR250969.dedup.bam         
-  -M results/3-dedup/NA20274_ERR250969.metrics.txt         
-  --CREATE_INDEX true         
-  --TMP_DIR results/3-dedup/NA20274_ERR250969.tmp > logs/3-dedup/NA20274_ERR250969.dedup.log 2>&1
-----------------------
-samtools index results/3-dedup/NA20274_ERR250969.dedup.bam
-----------------------
-module load GATK/4.6.0.0 samtools/1.21
+module load GATK/4.6.0.0
 ----------------------
 gatk MarkDuplicates         
   -I results/2-map_reads/NA20274_ERR250968.bam         
@@ -112,23 +59,32 @@ gatk MarkDuplicates
   --CREATE_INDEX true         
   --TMP_DIR results/3-dedup/NA20274_ERR250968.tmp > logs/3-dedup/NA20274_ERR250968.dedup.log 2>&1
 ----------------------
-samtools index results/3-dedup/NA20274_ERR250968.dedup.bam
+module load GATK/4.6.0.0
+----------------------
+gatk MarkDuplicates         
+  -I results/2-map_reads/NA19913_ERR250967.bam         
+  -O results/3-dedup/NA19913_ERR250967.dedup.bam         
+  -M results/3-dedup/NA19913_ERR250967.metrics.txt         
+  --CREATE_INDEX true         
+  --TMP_DIR results/3-dedup/NA19913_ERR250967.tmp > logs/3-dedup/NA19913_ERR250967.dedup.log 2>&1
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
-gatk
-  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
-  -Xms4G
-  -Xmx4G
-  -XX:ParallelGCThreads=4" BaseRecalibrator      
-  -I results/3-dedup/NA20274_ERR250968.dedup.bam      
-  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz      
-  -O results/4-bqsr/NA20274_ERR250968.recal_data.table
+gatk MarkDuplicates         
+  -I results/2-map_reads/NA20274_ERR250969.bam         
+  -O results/3-dedup/NA20274_ERR250969.dedup.bam         
+  -M results/3-dedup/NA20274_ERR250969.metrics.txt         
+  --CREATE_INDEX true         
+  --TMP_DIR results/3-dedup/NA20274_ERR250969.tmp > logs/3-dedup/NA20274_ERR250969.dedup.log 2>&1
+----------------------
+module load GATK/4.6.0.0
+----------------------
+gatk MarkDuplicates         
+  -I results/2-map_reads/NA19913_ERR250256.bam         
+  -O results/3-dedup/NA19913_ERR250256.dedup.bam         
+  -M results/3-dedup/NA19913_ERR250256.metrics.txt         
+  --CREATE_INDEX true         
+  --TMP_DIR results/3-dedup/NA19913_ERR250256.tmp > logs/3-dedup/NA19913_ERR250256.dedup.log 2>&1
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -140,27 +96,12 @@ gatk
   -I results/3-dedup/NA20274_ERR250969.dedup.bam      
   -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
   --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
   --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz      
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz      
   -O results/4-bqsr/NA20274_ERR250969.recal_data.table
-----------------------
-module load GATK/4.6.0.0
-----------------------
-gatk
-  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
-  -Xms4G
-  -Xmx4G
-  -XX:ParallelGCThreads=4" BaseRecalibrator      
-  -I results/3-dedup/NA19913_ERR250256.dedup.bam      
-  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz      
-  -O results/4-bqsr/NA19913_ERR250256.recal_data.table
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -172,11 +113,70 @@ gatk
   -I results/3-dedup/NA19913_ERR250967.dedup.bam      
   -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
   --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
   --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
-  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz      
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz      
   -O results/4-bqsr/NA19913_ERR250967.recal_data.table
+----------------------
+module load GATK/4.6.0.0
+----------------------
+gatk
+  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
+  -Xms4G
+  -Xmx4G
+  -XX:ParallelGCThreads=4" BaseRecalibrator      
+  -I results/3-dedup/NA20274_ERR250968.dedup.bam      
+  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
+  --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz      
+  -O results/4-bqsr/NA20274_ERR250968.recal_data.table
+----------------------
+module load GATK/4.6.0.0
+----------------------
+gatk
+  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
+  -Xms4G
+  -Xmx4G
+  -XX:ParallelGCThreads=4" BaseRecalibrator      
+  -I results/3-dedup/NA19913_ERR250256.dedup.bam      
+  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
+  --known-sites /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.known_indels.vcf.gz
+  --known-sites /fdb/GATK_resource_bundle/hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz      
+  -O results/4-bqsr/NA19913_ERR250256.recal_data.table
+----------------------
+module load GATK/4.6.0.0
+----------------------
+gatk
+  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
+  -Xms2G
+  -Xmx2G
+  -XX:ParallelGCThreads=4" ApplyBQSR      
+  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
+  -I results/3-dedup/NA20274_ERR250968.dedup.bam      
+  --bqsr-recal-file results/4-bqsr/NA20274_ERR250968.recal_data.table      
+  -O results/4-bqsr/NA20274_ERR250968.recal.bam
+----------------------
+module load GATK/4.6.0.0
+----------------------
+gatk
+  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
+  -Xms2G
+  -Xmx2G
+  -XX:ParallelGCThreads=4" ApplyBQSR      
+  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
+  -I results/3-dedup/NA19913_ERR250967.dedup.bam      
+  --bqsr-recal-file results/4-bqsr/NA19913_ERR250967.recal_data.table      
+  -O results/4-bqsr/NA19913_ERR250967.recal.bam
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -206,25 +206,13 @@ module load GATK/4.6.0.0
 ----------------------
 gatk
   --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
-  -Xms2G
-  -Xmx2G
-  -XX:ParallelGCThreads=4" ApplyBQSR      
+  -Xms16G
+  -Xmx16G
+  -XX:ParallelGCThreads=8" HaplotypeCaller      
   -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  -I results/3-dedup/NA19913_ERR250967.dedup.bam      
-  --bqsr-recal-file results/4-bqsr/NA19913_ERR250967.recal_data.table      
-  -O results/4-bqsr/NA19913_ERR250967.recal.bam
-----------------------
-module load GATK/4.6.0.0
-----------------------
-gatk
-  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
-  -Xms2G
-  -Xmx2G
-  -XX:ParallelGCThreads=4" ApplyBQSR      
-  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  -I results/3-dedup/NA20274_ERR250968.dedup.bam      
-  --bqsr-recal-file results/4-bqsr/NA20274_ERR250968.recal_data.table      
-  -O results/4-bqsr/NA20274_ERR250968.recal.bam
+  -I results/4-bqsr/NA20274_ERR250969.recal.bam      
+  -O results/5-vcf/NA20274_ERR250969.raw.g.vcf.gz      
+  -ERC GVCF > logs/5-vcf/NA20274_ERR250969.haplotype_caller.log 2>&1
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -234,9 +222,9 @@ gatk
   -Xmx16G
   -XX:ParallelGCThreads=8" HaplotypeCaller      
   -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  -I results/4-bqsr/NA20274_ERR250969.recal.bam      
-  -O results/5-vcf/NA20274_ERR250969.raw.g.vcf.gz      
-  -ERC GVCF > logs/5-vcf/NA20274_ERR250969.haplotype_caller.log 2>&1
+  -I results/4-bqsr/NA19913_ERR250967.recal.bam      
+  -O results/5-vcf/NA19913_ERR250967.raw.g.vcf.gz      
+  -ERC GVCF > logs/5-vcf/NA19913_ERR250967.haplotype_caller.log 2>&1
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -261,18 +249,6 @@ gatk
   -I results/4-bqsr/NA19913_ERR250256.recal.bam      
   -O results/5-vcf/NA19913_ERR250256.raw.g.vcf.gz      
   -ERC GVCF > logs/5-vcf/NA19913_ERR250256.haplotype_caller.log 2>&1
-----------------------
-module load GATK/4.6.0.0
-----------------------
-gatk
-  --java-options "-Djava.io.tmpdir=/lscratch/$SLURM_JOBID
-  -Xms16G
-  -Xmx16G
-  -XX:ParallelGCThreads=8" HaplotypeCaller      
-  -R /fdb/GATK_resource_bundle/hg38/Homo_sapiens_assembly38.fasta      
-  -I results/4-bqsr/NA19913_ERR250967.recal.bam      
-  -O results/5-vcf/NA19913_ERR250967.raw.g.vcf.gz      
-  -ERC GVCF > logs/5-vcf/NA19913_ERR250967.haplotype_caller.log 2>&1
 ----------------------
 module load GATK/4.6.0.0
 ----------------------
@@ -325,6 +301,7 @@ gatk
   --resource:hapmap,known=false,training=true,truth=true,prior=15.0           /fdb/GATK_resource_bundle/hg38/hapmap_3.3.hg38.vcf.gz           
   --resource:omni,known=false,training=true,truth=false,prior=12.0           /fdb/GATK_resource_bundle/hg38/1000G_omni2.5.hg38.vcf.gz          
   --resource:1000G,known=false,training=true,truth=false,prior=10.0           /fdb/GATK_resource_bundle/hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz          
+  -resource:dbsnp,known=false,training=true,truth=false,prior=10.0           /fdb/GATK_resource_bundle/hg38/dbsnp_146.hg38.vcf.gz          
   -an QD
   -an MQ
   -an MQRankSum
