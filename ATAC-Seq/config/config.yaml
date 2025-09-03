@@ -9,7 +9,7 @@ reference:
     # Path to reference genome in fasta format
     fasta: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa
     # Chromosome length
-    idx: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/hg38.chrom.sizes
+    idx: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa.fai
     # Genome size for macs2 callpeak
     gsize: hs
 
