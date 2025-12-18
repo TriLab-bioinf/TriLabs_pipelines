@@ -1,0 +1,16 @@
+# Technologu prefixes from read IDs,,
+# @HWI-Mxxxx or @Mxxxx - MiSeq,,
+# @HWUSI - GAIIx,,
+# @HWI-Dxxxx - HiSeq 2000/2500,,
+# @Kxxxx - HiSeq 3000(?)/4000,,
+# @Nxxxx - NextSeq 500/550,,
+# @Axxxxx - NovaSeq,,
+# @Vxxxxx = NextSeq 2000,,
+# @AAxxxxx - NextSeq 2000 P1/P2/P3,,
+# _2225* - NextSeq P4,,
+# @Hxxxxxx - NovaSeq S1/S2/S4,,
+#,,
+# Sample sheet for Illumina sequencing,
+sample_ID,replicate_ID,flowcell_ID,lane,library,technology,fastq_1,fastq_2
+test1,A,NB500,001,1,Illumina,test1.R1.fastq.gz,test1.R2.fastq.gz
+test2,A,NB500,001,1,Illumina,test2.R1.fastq.gz,test2.R2.fastq.gz

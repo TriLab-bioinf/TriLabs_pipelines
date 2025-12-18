@@ -1,0 +1,53 @@
+## Metadata
+
+# 1. METADATA FILE
+# Path to sample file
+metadata: ./config/samplesheet.csv
+
+# 2. GENOME REFERENCE INFORMATION
+reference:  
+    # Path to reference genome in fasta format
+    fasta: /fdb/igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa
+    dict: /fdb/igenomes/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.dict
+    # Path to annotation file in gtf format  (full path)
+    gtf: /fdb/igenomes/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf
+    # Path to high-confidence snps file (used for base recalibration)
+    known_sites: /fdb/GATK_resource_bundle/mm10/dbsnp146_fixedNames.vcf.gz
+    # Path to whole chromosome intervals file (used to restrict the analysis to specific regions, e.g., exome)
+    intervals: data/intervals/merged.exons.bed
+    # Whole chromosome intervals for GenomicsDBImport
+    # It can be generated from the dict file using the script scripts/dict_to_genome_interval.sh. 
+    # Example: bash scripts/dict_to_genome_interval.sh <genome.dict> > chr_intervals.bed
+    whole_chr_intervals: data/intervals/chr_intervals.bed
+
+# 3. BWA DATABASE    
+
+# Path to bwa database (set bwa_db: None if a new db has to be generated)
+# path: /fdb/bwa-mem2/hg38/
+bwadb: /fdb/igenomes/Mus_musculus/UCSC/mm10/Sequence/BWAIndex
+
+# 4. READ FILES
+# Path to raw reads directory (fastq files) 
+reads: data/reads/test
+# Set paired to False if single-end reads are used
+paired: True
+
+# 5. EXOME SEQUENCING
+# Set to 'True' if exome sequencing data are used, othersie set to 'False'
+# This will enable the use of intervals in the variant calling steps
+exomeseq: True
+# Padding to be added to exome intervals (default: 0)
+interval_padding: 0
+
+# 6. TRIMMING
+# Perform trimming [True, False]
+trimming: True
+# Path to trimming adapters file
+adapters: data/adapters/adapters.fa
+
+# 7. GenomicsDBImport action, either 'create' or 'update'
+db_action: 'create'
+# 8. Merge contigs into num partitions (True, False). 
+# Set it to true if > 25 contigs are present in the reference genome
+merge_contigs: False
+
