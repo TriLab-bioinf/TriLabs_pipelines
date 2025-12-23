@@ -34,7 +34,7 @@ localrules: all #,
 rule all:
     # IMPORTANT: output file for all rules has to match the name specified in the output file
     # and not include suffixes that the command use might add to it.
-    input: "results/13-multiqc/multiqc_report.html"  
+    input: "results/14-multiqc/multiqc_report.html"  
 
 # 1- Trim reads with fastp
 include: "rules/trim_reads.smk"
@@ -45,13 +45,17 @@ include: "rules/map_reads.smk"
 # 3- Flag duplicated reads with GATK MarkDuplicates
 include: "rules/mark_duplicates.smk"
 
-# 4- Base recallibration with GATK BaseRecalibrator
-# Using wrapper
+    # 4- Base recallibration with GATK BaseRecalibrator
 include: "rules/base_recalibrator.smk"
 
-# 5- Call variants for single samples with GATK HaplotypeCaller (GVCF format)
-# Using wrapper
+    # 5- Call variants for single samples with GATK HaplotypeCaller (GVCF format)
 include: "rules/gvcf_caller.smk"
+
+# 6- Merge by-chr-VCFs and split variants into SNPs and INDELs
+include: "rules/merge_select_variants.smk"
+
+# 7- Filter variants with GATK VariantFiltration
+include: "rules/filter_variants.smk"
 
 # 8- Run multiqc report
 include: "rules/multiqc.smk"

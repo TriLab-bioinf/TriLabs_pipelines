@@ -9,20 +9,22 @@ rule multiqc:
         i6 = expand("results/6-calls-gvfc/{s}.g.vcf.gz", s = samples),
         i7 = rules.genomics_db_import.output.db,
         i7_bkp = rules.genomics_db_import.output.db_bkp,
-        i8 = "results/8-all-calls/all.vcf.gz",
-        i10 = "results/9-subset-snps/all_SNP.vcf.gz",
-        i11 = "results/10-subset-indels/all_INDELS.vcf.gz",
-        i13 = "results/11-filter-snps/all_SNP.filter.vcf.gz",
-        i14 = "results/12-filter-indels/all_INDELS.filter.vcf.gz"
-    output: "results/13-multiqc/multiqc_report.html"
+        i8 = expand("results/8-all-calls-by-chr/all_samples.{chrom}.vcf.gz", chrom = get_chr_ids(whole_chr_intervals)),
+        i9 = "results/9-all-calls/all.vcf.gz",
+        i10 = "results/10-subset-snps/all_SNP.vcf.gz",
+        i11 = "results/11-subset-indels/all_INDELS.vcf.gz",
+        i13 = "results/12-filter-snps/all_SNP.filter.vcf.gz",
+        i14 = "results/13-filter-indels/all_INDELS.filter.vcf.gz"
+    output: 
+        "results/14-multiqc/multiqc_report.html"
     resources:
         partition = "quick",
         mem_mb = 4000
     log: 
-        logfile = "logs/13-multiqc/multiqc.log"
+        logfile = "logs/14-multiqc/multiqc.log"
     shell:
         """
         module load multiqc/1.28
         
-        multiqc -f -d -o results/12-multiqc results/ > {log.logfile} 2>&1
+        multiqc -f -d -o results/14-multiqc results/ > {log.logfile} 2>&1
         """

@@ -78,27 +78,47 @@ rule genomics_db_import:
         
         """
 
+# Split merged.exons.bed file into chr-based intervals for running genotype_gvcfs rule by chromosome:
+rule split_intervals_by_chr:
+    input:
+        bed = intervals if config["exomeseq"] == True else whole_chr_intervals
+    output:
+        chr_bed = expand("results/intervals/{chrom}.bed", chrom = get_chr_ids(whole_chr_intervals)) 
+    run:
+        import os
+        os.makedirs("results/intervals/", exist_ok=True)
+        chr_interval = dict()
+        with open(input.bed, 'r') as bedfile:
+            for line in bedfile:
+                chrom = line.strip().split('\t')[0]
+                chr_interval.setdefault(chrom, []).append(line)
+        
+        for chrom in chr_interval.keys():
+            with open(f"results/intervals/{chrom}.bed", 'w') as f:
+                for line in chr_interval[chrom][0:10]:
+                    f.write(line)
+        
 # Joined gentyping using GenomicsDB 
-
-rule genotype_gvcfs:
+rule genotype_gvcfs_by_chr:
     input:
         genomicsdb = rules.genomics_db_import.output.db,
-        ref = f"{genome}"
+        ref = f"{genome}",
+        intvl = "results/intervals/{chrom}.bed"
     output:
-        vcf = "results/8-all-calls/all.vcf.gz"
+        vcf = "results/8-all-calls-by-chr/all_samples.{chrom}.vcf.gz"
     log:
-        logs = "logs/8-all-calls/genotypegvcfs.log"
+        logs = "logs/8-all-calls-by-chr/genotypegvcfs.{chrom}.log"
     params:
-        exome_intervals = f"--intervals {intervals}" if config["exomeseq"] == True else "",
+        exome_intervals = f"--intervals",
         exome_interval_padding = f"--interval-padding {config['interval_padding']}" if config["exomeseq"] == True else "",
         extra = "-A StrandBiasBySample",  # optional
         java_opts = "", # optional
     resources:
         mem_mb = 8 * 1024,
-        runtime = 24 * 60,
+        runtime = 2 * 24 * 60,
         partition = "normal"
     benchmark:
-        "benchmarks/all-calls/genotypegvcfs.tsv"
+        "benchmarks/all-calls-by-chr/genotypegvcfs.{chrom}.tsv"
     shell:
         """
         module load GATK/4.6.0.0
@@ -107,87 +127,8 @@ rule genotype_gvcfs:
             -R {input.ref} \
             -V gendb://{input.genomicsdb} \
             -O {output.vcf} \
-            {params.extra} {params.exome_intervals} {params.exome_interval_padding} > {log.logs} 2>&1
+            {params.extra} \
+            {params.exome_intervals} {input.intvl} \
+            {params.exome_interval_padding} > {log.logs} 2>&1
 
-        """
-
-rule select_variants:
-    input:
-        vcf = "results/8-all-calls/all.vcf.gz"
-    output:
-        snps = "results/9-subset-snps/all_SNP.vcf.gz",
-        indels = "results/10-subset-indels/all_INDELS.vcf.gz"
-    log:
-        snps = "logs/subset/snps.log",
-        indels = "logs/subset/indels.log"
-    params:
-        extra = ""
-    resources:
-        mem_mb = 1024 * 32,
-        runtime = 2 * 60,
-        partition = "quick"
-    benchmark:
-        "benchmarks/subset-variants/subset.tsv"
-    shell:
-        """
-        module load GATK/4.6.0.0
-
-        gatk SelectVariants \
-            -V {input.vcf} \
-            -select-type SNP \
-            -O {output.snps}  > {log.snps} 2>&1
-
-        gatk SelectVariants \
-            -V {input.vcf} \
-            -select-type INDEL \
-            -O {output.indels}  > {log.indels} 2>&1
-        """
-
-rule filter_variants:
-    input:
-        snps = "results/9-subset-snps/all_SNP.vcf.gz",
-        indels = "results/10-subset-indels/all_INDELS.vcf.gz",
-        ref = f"{genome}"
-    output:
-        snps = "results/11-filter-snps/all_SNP.filter.vcf.gz",
-        indels = "results/12-filter-indels/all_INDELS.filter.vcf.gz"
-    log:
-        snps = "logs/filter_variant/snps.log",
-        indels = "logs/filter_variant/indels.log"
-    params:
-        extra = "",
-        java_options = "-Xms4G -Xmx4G -XX:ParallelGCThreads=2"
-    resources:
-        mem_mb = 1024 * 32,
-        runtime = 2 * 60,
-        partition = "quick"
-    benchmark:
-        "benchmarks/subset-variants/subset.tsv"
-    shell:
-        """
-        module load GATK/4.6.0.0
-
-        gatk --java-options '{params.java_options}' VariantFiltration \
-            --R {input.ref} \
-            --V {input.snps} \
-            --window 35 \
-            --cluster 3 \
-            -filter "QD < 2.0" --filter-name "QD2" \
-            -filter "QUAL < 30.0" --filter-name "QUAL30" \
-            -filter "SOR > 3.0" --filter-name "SOR3" \
-            -filter "FS > 60.0" --filter-name "FS60" \
-            -filter "MQ < 40.0" --filter-name "MQ40" \
-            -filter "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" \
-            -filter "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" \
-            -O {output.snps} > {log.snps} 2>&1
-
-        gatk --java-options '{params.java_options}' VariantFiltration \
-            --R {input.ref} \
-            --V {input.indels} \
-            --window 35 \
-            -filter "QD < 2.0" --filter-name "QD2" \
-            -filter "QUAL < 30.0" --filter-name "QUAL30" \
-            -filter "FS > 200.0" --filter-name "FS200" \
-            -filter "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20" \
-            -O {output.indels} > {log.indels} 2>&1
         """
