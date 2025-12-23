@@ -1,0 +1,10 @@
+.snakemake/
+benchmarks/
+config/snakemake_profile/
+data/reads/
+exon_intervals.bed
+logs/
+results/
+slurm-*
+tmp*
+
