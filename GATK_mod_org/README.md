@@ -113,7 +113,7 @@ python ./scripts/parse_snakemake_commands.py -i snakemake_output.txt -o workflow
 ```
 
 #### Options:
-V
+
 - `-i/--input`: Input file containing snakemake dry-run output (required)
 - `-o/--output`: Output file path (default: snakemake_commands.txt)
 
