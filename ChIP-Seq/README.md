@@ -54,10 +54,31 @@ snakemake --profile ./config/snakemake_profile --snakefile ./workflow/ChIP-Seq_p
 sbatch run_snakemake.sh ./workflow/ChIP-Seq_pipeline.smk
 ```
 
-### 5- To fetch the shell commands ran by the snakemake pipeline use the following command
+### 5- Extract shell commands in execution order using Python script
+
+For a more structured output with commands organized in their execution order, you can use the `parse_snakemake_commands.py` Python script. This script parses the snakemake dry-run output and extracts shell commands along with their associated rule names and job numbers, maintaining the proper execution sequence.
+
+#### Usage:
+
+First, generate the snakemake dry-run output:
+
+```bash
+snakemake --snakefile ./workflow/ChIP-Seq_pipeline.smk -p -n --forceall > snakemake_output.txt
 ```
-bash print_snakemake_shell_commands.sh -c  module,fastp,bowtie,samtools,picard,macs,ucsc,deeptools,multiqc -p workflow/ChIP-Seq_pipeline.smk
+
+Then, parse the output to extract commands in execution order:
+
+```bash
+python ./scripts/parse_snakemake_commands.py -i snakemake_output.txt -o snakemake_commands_ordered.txt
 ```
-The command above will create the file [snakemake_shell_commands.txt](workflow/snakemake_shell_commands.txt) within the `workflow` directory with an unsorted print out of all shell commands executed by the snakemake pipeline. 
+
+#### Options:
+
+- `-i/--input`: Input file containing snakemake dry-run output (required)
+- `-o/--output`: Output file path (default: snakemake_commands.txt)
+
+The output file will contain each shell command with its corresponding job number and rule name, making it easier to understand the pipeline execution flow and debug specific steps. Commands are formatted with normalized spacing and clear separators between different jobs.
+
+ 
 
  
