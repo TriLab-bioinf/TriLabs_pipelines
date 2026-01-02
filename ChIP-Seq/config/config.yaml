@@ -42,3 +42,8 @@ flag_dup: True
 bw_bin: 50
 bw_normalization: "BPM"
 bw_ignore_dup: True
+
+# 8. PEAK CALLING
+peak_calling:
+    broad: False
+    other: ""

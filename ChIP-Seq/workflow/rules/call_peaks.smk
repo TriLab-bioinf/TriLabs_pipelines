@@ -10,12 +10,14 @@ rule peak_calling:
     params:
         gsize = config["reference"]["gsize"],
         name = "{sample}",
-        outdir = "results/4-peak_calling"
+        outdir = "results/4-peak_calling",
+        broad = "--broad" if config["peak_calling"]["broad"] else "",
+        misc_opts = config["peak_calling"]["other"]
     shell:
         """
         module load macs
 
-        macs2 callpeak -t {input.treat} -c {input.control} -f BAM -g {params.gsize} -n {params.name} -B -q 0.01 --outdir {params.outdir}
+        macs2 callpeak -t {input.treat} -c {input.control} -f BAM -g {params.gsize} -n {params.name} -B -q 0.01 --outdir {params.outdir} {params.broad} {params.misc_opts}
 
         """
 
