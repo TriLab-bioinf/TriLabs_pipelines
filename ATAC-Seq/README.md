@@ -70,7 +70,7 @@ For a more structured output with commands organized in their execution order, y
 First, generate the snakemake dry-run output:
 
 ```bash
-snakemake --snakefile ./workflow/ChIP-Seq_pipeline.smk -p -n --forceall > snakemake_output.txt
+snakemake --snakefile ./workflow/ATAC-Seq_pipeline.smk -p -n --forceall > snakemake_output.txt
 ```
 
 Then, parse the output to extract commands in execution order:
