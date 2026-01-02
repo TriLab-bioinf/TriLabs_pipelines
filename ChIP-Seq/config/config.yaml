@@ -10,7 +10,10 @@ reference:
     fasta: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa
     # Chromosome length
     idx: /fdb/igenomes/Homo_sapiens/UCSC/hg38/Sequence/WholeGenomeFasta/genome.fa.fai
-    # Genome size for macs2 callpeak
+    # Genome size for macs2 callpeak. 
+    # For more info see:
+    # 1- https://macs3-project.github.io/MACS/docs/callpeak.html
+    # 2- https://deeptools.readthedocs.io/en/latest/content/feature/effectiveGenomeSize.html
     gsize: hs
 
 # 3. BOWTIE DATABASE    
@@ -47,3 +50,4 @@ bw_ignore_dup: True
 peak_calling:
     broad: False
     other: ""
+    q_value: 0.01

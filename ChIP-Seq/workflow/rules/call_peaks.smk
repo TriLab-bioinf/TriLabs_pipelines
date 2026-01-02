@@ -4,7 +4,9 @@ rule peak_calling:
         treat = "results/3-dedup/{sample}_treat.dedup.bam",
         control = "results/3-dedup/{sample}_input.dedup.bam"
     output:
-        peaks = "results/4-peak_calling/{sample}_peaks.narrowPeak",
+        narrow_peak = "results/4-peak_calling/{sample}_peaks.narrowPeak" if config["peak_calling"]["broad"] == False else [],
+        broad_peak = "results/4-peak_calling/{sample}_peaks.broadPeak" if config["peak_calling"]["broad"] else [],
+        gapped_peak = "results/4-peak_calling/{sample}_peaks.gappedPeak" if config["peak_calling"]["broad"] else [],
         control_bdg = "results/4-peak_calling/{sample}_control_lambda.bdg",
         chip_bdg = "results/4-peak_calling/{sample}_treat_pileup.bdg",
     params:
@@ -12,12 +14,13 @@ rule peak_calling:
         name = "{sample}",
         outdir = "results/4-peak_calling",
         broad = "--broad" if config["peak_calling"]["broad"] else "",
-        misc_opts = config["peak_calling"]["other"]
+        misc_opts = config["peak_calling"]["other"],
+        qvalue = config["peak_calling"]["q_value"]
     shell:
         """
         module load macs
 
-        macs2 callpeak -t {input.treat} -c {input.control} -f BAM -g {params.gsize} -n {params.name} -B -q 0.01 --outdir {params.outdir} {params.broad} {params.misc_opts}
+        macs2 callpeak -t {input.treat} -c {input.control} -f BAM -g {params.gsize} -n {params.name} -B -q {params.qvalue} --outdir {params.outdir} {params.broad} {params.misc_opts}
 
         """
 
