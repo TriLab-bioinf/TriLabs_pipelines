@@ -8,16 +8,12 @@
 
 Note: This should be done only once.
 
-### 1- Start an interactive session in Biowulf and go to your working directory (WD). 
+### 1- Start an interactive session in Biowulf and go to your working directory (WD).
 
 ### 2- Download the ChIP-Seq pipeline by running the  following command in your WD:
+
 ```
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/ChIP-Seq
-```
-
-### 3- Download the biowulf snakemake profile from GitHub to ChIP-Seq/config directory
-```
-git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
 ```
 
 ### Now you should be ready to run the ChIP-Seq pipeline 

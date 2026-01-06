@@ -16,12 +16,6 @@ Note: This should be done only once.
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/GATK
 ```
 
-### 3- Download the biowulf snakemake profile from GitHub to GATK/config directory
-
-```bash
-git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
-```
-
 ### Now you should be ready to run the GATK pipeline 
 
 ## B. Running the GATK pipeline in Biowulf

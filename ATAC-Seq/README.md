@@ -16,12 +16,6 @@ Note: This should be done only once.
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/ATAC-Seq
 ```
 
-### 3- Download the biowulf snakemake profile from GitHub to ATAC-Seq/config directory
-
-```bash
-git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
-```
-
 ### Now you should be ready to run the ATAC-Seq pipeline 
 
 ## B. Running the ATAC-Seq pipeline in Biowulf
