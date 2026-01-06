@@ -6,7 +6,7 @@
 
 ## Running the ChIP-Seq pipeline in Biowulf
 
-### 1- Within the config directory do the following:
+### 1- Go the the ChIP-Seq folder and within the config directory do the following:
 
 - Edit the [config.yaml](config/config.yaml) file with required information
 - Edit [samplesheet.csv](config/samplesheet.csv) with sample data information
