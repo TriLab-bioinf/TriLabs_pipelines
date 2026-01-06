@@ -11,13 +11,14 @@ The RNA-Seq pipeline is designed for processing bulk RNA sequencing data. It per
 **Key Features:**
 
 - Handling of single- or paired-end reads
+- Compatible with bacterial
 - Quality control of raw reads (fastp)
 - Read trimming and adapter removal (fastp)
 - Alignment to reference genome (STAR)
 - Duplicate removal (GATK's Picard)
 - Gene expression quantification (featureCounts)
-- Generation of expression profiles in BigWig format (bamCoverage)
-- Pipeline QC report (MultiQC) 
+- Generation of expression profiles in BigWig format (deeptools::bamCoverage)
+- Pipeline QC report (MultiQC)
 
 **Typical Use Cases:**
 
@@ -37,12 +38,12 @@ The ChIP-Seq pipeline processes chromatin immunoprecipitation sequencing data to
 
 **Key Features:**
 
-- Quality control and read trimming
-- Alignment to reference genome
-- Duplicate removal
-- Peak calling for transcription factor binding sites or histone marks
-- Peak visualization
-
+- Quality control and read trimming (fastp)
+- Alignment to reference genome (bowtie2)
+- Duplicate removal (Picard)
+- Narrow and broad peak calling (macs2)
+- Generation of peak profiles in BigWig format (deeptools::bamCoverage)
+- Pipeline QC report (MultiQC)
 
 **Typical Use Cases:**
 
@@ -62,11 +63,12 @@ The ATAC-Seq pipeline analyzes Assay for Transposase-Accessible Chromatin sequen
 
 **Key Features:**
 
-- Quality control and adapter trimming
-- Alignment to reference genome
-- Duplicate removal
-- Peak calling for open chromatin regions
-
+- Quality control and read trimming (fastp)
+- Alignment to reference genome (bowtie2)
+- Duplicate removal (Picard)
+- Peak calling for open chromatin regions (macs2)
+- Generation of peak profiles in BigWig format (deeptools::bamCoverage)
+- Pipeline QC report (MultiQC)
 
 **Typical Use Cases:**
 
@@ -81,20 +83,23 @@ The ATAC-Seq pipeline analyzes Assay for Transposase-Accessible Chromatin sequen
 
 ---
 
-### 4. GATK Pipeline (Human)
+### 4. GATK Pipeline (Human germline)
 
 The GATK pipeline is specifically designed for processing human whole genome sequencing data following GATK best practices for variant calling. It identifies single nucleotide polymorphisms (SNPs) and insertions/deletions (INDELs) in human samples.
 
 **Key Features:**
 
-- Read alignment and preprocessing
-- Duplicate removal
-- Base quality score recalibration (BQSR)
-- Variant calling using HaplotypeCaller
-- Variant quality score recalibration (VQSR)
-- Joint genotyping across multiple samples
-- Variant filtering
+- Quality control and read trimming (fastp)
+- Read alignment and preprocessing (bwa2)
+- Duplicate removal (GATK MarkDuplicates)
+- Base quality score recalibration (BQSR) (GATK BaseRecalibrator -> ApplyBQSR)
+- Variant calling per sample using HaplotypeCaller (GVCF) (GATK HaplotypeCaller)
+- Combine per-sample GVCF files (GATK CombineGVCFs)
+- Joint genotyping across multiple samples (GATK GenotypeGVCFs)
+- Variant quality score recalibration and filtering (VQSR) (VariantRecalibrator -> ApplyVQSR)
 - Support for WGS data
+
+_Note: Support for WES data is not yet implemented_
 
 **Typical Use Cases:**
 
@@ -117,10 +122,14 @@ The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipel
 
 - Organism-independent workflow
 - Configurable reference genome and annotations
-- Read alignment and preprocessing
-- Duplicate removal
-- Variant calling with HaplotypeCaller
-- Hard filtering for variants (alternative to VQSR for non-model organisms)
+- Quality control and read trimming (fastp)
+- Read alignment to reference (bwa2)
+- Duplicate removal (GATK MarkDuplicates)
+- Base quality score recalibration (BQSR) (GATK BaseRecalibrator -> ApplyBQSR)
+- Variant calling per sample using HaplotypeCaller (GVCF) (GATK HaplotypeCaller)
+- Implementation of GenomicsDB for efficient variant analysis of large cohorts (GATK GenomicsDBImport)
+- Joint genotyping across multiple samples (GATK GenotypeGVCFs)
+- Hard filtering for variants (alternative to VQSR for non-model organisms) (GATK VariantFiltration)
 - Support for both WGS and WES data
 - Custom interval targeting for exome data
 - Parallel calling of variants per chromosome/contig
@@ -154,6 +163,7 @@ All pipelines include a Python utility (`parse_snakemake_commands.py`) that extr
 - Documentation and reproducibility
 
 **Usage:**
+
 ```bash
 snakemake --snakefile ./workflow/PIPELINE.smk -p -n --forceall > snakemake_output.txt
 python parse_snakemake_commands.py -i snakemake_output.txt -o commands_ordered.txt
