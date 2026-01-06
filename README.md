@@ -149,7 +149,7 @@ The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipel
 All pipelines follow a similar structure and execution pattern:
 
 1. **Configuration:** Edit `config/config.yaml` and `config/samplesheet.csv`
-2. **Dry Run:** Test pipeline with `snakemake -n -p`
+2. **Dry Run:** Test pipeline with `run_snakemake.sh -n`
 3. **Execution:** Submit to cluster with `sbatch run_snakemake.sh`
 4. **Results:** Find outputs in `results/` directory
 
