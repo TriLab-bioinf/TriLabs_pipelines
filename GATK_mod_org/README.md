@@ -16,12 +16,6 @@ Note: This should be done only once.
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/GATK
 ```
 
-### 3- Download the biowulf snakemake profile from GitHub to GATK/config directory
-
-```bash
-git clone https://github.com/NIH-HPC/snakemake_profile.git ./config/snakemake_profile
-```
-
 ### Now you should be ready to run the GATK pipeline 
 
 ## B. Running the GATK pipeline in Biowulf
@@ -64,34 +58,37 @@ FASTA_GENOME=/path/to/fasta/file
 
 _Note_: The script _gtf_to_exon_intervals.sh_ makes use of the _bedtools_ tool via the `load module` command, so make sure _bedtools_ can be found via your environmental variable $PATH.
 
-### 3- Load Snakemake module
+### 3- To run the Snakemake pipeline to process sequencing data in a cluster machine (best option)
+
+First run a `dry run` to make sure that everything is configured correctly by adding the `-n` parameter to the `run_snakemake.sh` command:
 
 ```bash
-module load snakemake/7.32.4
+./run_snakemake.sh -n
 ```
 
-### 4- OPTIONAL: Activate conda environment (if running snakemake using 5.a or 5.b below)
+If everything looks OK, you can run the pipeline in the Biowulf cluster like so:
+
+```bash
+sbatch ./run_snakemake.sh
+```
+
+### 4- OPTIONAL: Activate conda environment and load the snakemake module in biowulf (if running snakemake using 5.a or 5.b below)
 
 ```bash
 source ~/bin/myconda
+module load snakemake/7.32.4
 ```
 
 ### 5.a- To run the Snakemake pipeline to process sequencing data locally (dry-run)
 
 ```bash
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p -n
+snakemake --profile ../snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p -n
 ```
 
 ### 5.b- To run the Snakemake pipeline to process sequencing data locally
 
 ```bash
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p
-```
-
-### 5.c- To run the Snakemake pipeline to process sequencing data in a cluster machine (best option)
-
-```bash
-sbatch run_snakemake.sh ./workflow/GATK_pipeline.smk
+snakemake --profile ../snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p
 ```
 
 ### 6- Extract shell commands in execution order using Python script
@@ -103,13 +100,13 @@ For a more structured output with commands organized in their execution order, y
 First, generate the snakemake dry-run output:
 
 ```bash
-snakemake --snakefile ./workflow/GATK_pipeline.smk -p -n --forceall > snakemake_output.txt
+./run_snakemake.sh -n --forceall > snakemake_output.txt
 ```
 
 Then, parse the output to extract commands in execution order:
 
 ```bash
-python ./scripts/parse_snakemake_commands.py -i snakemake_output.txt -o workflow/snakemake_commands_ordered.txt
+python ./scripts/parse_snakemake_commands.py -i snakemake_output.txt -o snakemake_commands_ordered.txt
 ```
 
 #### Options:

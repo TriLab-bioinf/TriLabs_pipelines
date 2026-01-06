@@ -10,14 +10,10 @@ Note: This should be done only once.
 ### 1- Start an interactive session in Biowulf and go to your working directory (WD). 
 
 ### 2- Download the RNAseq pipeline by running the  following command in your WD:
-```
+
+```bash
 git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/RNA-Seq
 ```
-
-### 3- Copy Biowulf Snakemake profile in your RNAseq_pipeline directory
-```
-git clone https://github.com/NIH-HPC/snakemake_profile.git config/snakemake_profile
-``` 
 
 ### Now you should be ready to run the RNAseq pipeline 
 
@@ -28,29 +24,37 @@ git clone https://github.com/NIH-HPC/snakemake_profile.git config/snakemake_prof
 - Edit the [config.yaml](config/config.yaml) file with required information
 - Edit [samplesheet.csv](config/samplesheet.csv) with sample data information
 
-### 2- Load Snakemake module
+### 2- To run the Snakemake pipeline to process sequencing data in a cluster machine (best option)
+
+First run a `dry run` to make sure that everything is configured correctly by adding the `-n` parameter to the `run_snakemake.sh` command:
+
+```bash
+./run_snakemake.sh -n
 ```
+
+If everything looks OK, you can run the pipeline in the Biowulf cluster like so:
+
+```bash
+sbatch ./run_snakemake.sh
+```
+
+### 3- OPTIONAL: Activate conda environment and load the snakemake module in biowulf (if running snakemake using 4.a or 4.b below)
+
+```bash
+source ~/bin/myconda
 module load snakemake/7.32.4
 ```
 
-### 3- OPTIONAL: Activate conda environment (if running snakemake using 4.a or 4.b below)
-```
-source ~/bin/myconda
-```
-
 ### 4.a- To run the Snakemake pipeline to process sequencing data locally (dry-run)
-```
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/RNAseq_pipeline.smk -p -n
+
+```bash
+snakemake --profile ../snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p -n
 ```
 
 ### 4.b- To run the Snakemake pipeline to process sequencing data locally
-```
-snakemake --profile ./config/snakemake_profile --snakefile ./workflow/RNAseq_pipeline.smk -p
-```
 
-### 4.c- To run the Snakemake pipeline to process sequencing data in a cluster machine (best option)
-```
-sbatch run_snakemake.sh ./workflow/RNAseq_pipeline.smk
+```bash
+snakemake --profile ../snakemake_profile --snakefile ./workflow/GATK_pipeline.smk -p
 ```
 
 ### 5- Extract shell commands in execution order using Python script
@@ -62,7 +66,7 @@ For a more structured output with commands organized in their execution order, y
 First, generate the snakemake dry-run output:
 
 ```bash
-snakemake --snakefile ./workflow/RNAseq_pipeline.smk -p -n --forceall > snakemake_output.txt
+./run_snakemake.sh -n --forceall > snakemake_output.txt
 ```
 
 Then, parse the output to extract commands in execution order:
@@ -77,5 +81,3 @@ python ./scripts/parse_snakemake_commands.py -i snakemake_output.txt -o snakemak
 - `-o/--output`: Output file path (default: snakemake_commands.txt)
 
 The output file will contain each shell command with its corresponding job number and rule name, making it easier to understand the pipeline execution flow and debug specific steps. Commands are formatted with normalized spacing and clear separators between different jobs.
-
- 

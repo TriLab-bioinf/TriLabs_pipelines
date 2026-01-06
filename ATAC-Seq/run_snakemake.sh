@@ -2,7 +2,7 @@
 #SBATCH --time=10-00:00:00 
 
 SNAKEFILE=./workflow/ATAC-Seq_pipeline.smk
-PARAMS=$1
+PARAMS="$*"
 
 if [[ ! -e ${SNAKEFILE} ]]; then
     echo; echo Please enter path to snakemake file; echo 
