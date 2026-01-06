@@ -4,21 +4,7 @@
 
 **Figure 1:** Schematic representation of the Snakemake ATAC-Seq pipeline
 
-## A. Setup the pipeline for the first time:
-
-Note: This should be done only once.
-
-### 1- Start an interactive session in Biowulf and go to your working directory (WD). 
-
-### 2- Download the ATAC-Seq pipeline by running the  following command in your WD:
-
-```bash
-git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/ATAC-Seq
-```
-
-### Now you should be ready to run the ATAC-Seq pipeline 
-
-## B. Running the ATAC-Seq pipeline in Biowulf
+## Running the ATAC-Seq pipeline in Biowulf
 
 ### 1- Within the config directory do the following:
 

@@ -4,21 +4,7 @@
 
 **Figure 1:** Schematic representation of the Snakemake ChIP-Seq pipeline 
 
-## A. Setup the pipeline for the first time:
-
-Note: This should be done only once.
-
-### 1- Start an interactive session in Biowulf and go to your working directory (WD).
-
-### 2- Download the ChIP-Seq pipeline by running the  following command in your WD:
-
-```
-git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines/ChIP-Seq
-```
-
-### Now you should be ready to run the ChIP-Seq pipeline 
-
-## B. Running the ChIP-Seq pipeline in Biowulf
+## Running the ChIP-Seq pipeline in Biowulf
 
 ### 1- Within the config directory do the following:
 

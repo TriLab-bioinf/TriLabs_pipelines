@@ -2,6 +2,20 @@
 
 This repository contains a collection of Snakemake pipelines for processing various types of sequencing data. All pipelines are optimized for running on the Biowulf HPC cluster at NIH.
 
+## Installation
+
+Note: This should be done only once.
+
+### 1- Start an interactive session in Biowulf and go to your working directory (WD)
+
+### 2- Download the TriLabs Snakemake Pipelines to your working directory by running the following command
+
+```bash
+git clone https://github.com/TriLab-bioinf/TriLabs_pipelines.git && cd TriLabs_pipelines
+```
+
+#### Now you should be ready to run the pipelines.
+
 ## Available Pipelines
 
 ### 1. RNA-Seq Pipeline
