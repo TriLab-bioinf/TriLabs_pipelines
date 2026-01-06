@@ -10,12 +10,14 @@ The RNA-Seq pipeline is designed for processing bulk RNA sequencing data. It per
 
 **Key Features:**
 
-- Quality control of raw reads (FastQC, MultiQC)
-- Read trimming and adapter removal
-- Alignment to reference genome
-- Duplicate removal
-- Gene expression quantification
-- Visualization of expression profiles
+- Handling of single- or paired-end reads
+- Quality control of raw reads (fastp)
+- Read trimming and adapter removal (fastp)
+- Alignment to reference genome (STAR)
+- Duplicate removal (GATK's Picard)
+- Gene expression quantification (featureCounts)
+- Generation of expression profiles in BigWig format (bamCoverage)
+- Pipeline QC report (MultiQC) 
 
 **Typical Use Cases:**
 
