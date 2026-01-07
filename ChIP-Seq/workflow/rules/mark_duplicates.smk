@@ -10,7 +10,7 @@ rule mark_duplicates:
     params: 
         "--READ_NAME_REGEX null --REMOVE_DUPLICATES false"
     log: 
-        logfile = "results/3-dedup/{sample}_{type}.dedup.log"
+        logfile = "logs/3-dedup/{sample}_{type}.dedup.log"
     threads: 24
     benchmark:
         "benchmarks/3-dedup/{sample}_{type}.tsv"

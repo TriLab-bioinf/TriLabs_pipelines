@@ -13,12 +13,13 @@ if (bowtiedb_path == "None") and (not os.path.exists("data/bowtiedb/genome")):
             partition = "quick",
             runtime = 14 * 60
         threads: 8
-        params: 
+        params:
+        log: "logs/2-map_reads/make_bowtie_index.log"
         shell:
             """
             module load bowtie
 
-            bowtie2-build --threads {threads} {input.gen} {output.db} 
+            bowtie2-build --threads {threads} {input.gen} {output.db} 2>&1 {log}
                 
             touch {output.db}
             """
@@ -67,7 +68,7 @@ rule map_reads:
         --phred33 \
         --rg-id {params.prefix} --rg SM:{params.prefix} --rg LB:library --rg PL:ILLUMINA \
         -U {input.fq1} \
-        --sensitive | samtools sort -@ 8 -O BAM -o {output.bam} -
+        --sensitive 2>{log} | samtools sort -@ 8 -O BAM -o {output.bam} -
         
         samtools index -@ 8 {output.bam}
         """
