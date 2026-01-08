@@ -12,7 +12,5 @@ ChIP-Seq/snakemake_commands_ordered.txt
 ChIP-Seq/snakemake_output.txt
 GATK_mod_org/.DS_Store
 GATK_mod_org/._.DS_Store
-GATK_mod_org/._dag.png
 GATK_mod_org/cmds.tmp
-GATK_mod_org/dag.png
 RNA-Seq/snakemake_output.txt
