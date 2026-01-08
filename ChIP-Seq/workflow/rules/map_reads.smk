@@ -54,7 +54,7 @@ rule map_reads:
         disk_mb= 1024 * 20
     benchmark:
         "benchmarks/2-map_reads/{sample}_{type}.bowtie2.tsv"
-    params: 
+    params:
         prefix = "{sample}_{type}",
         bowtiedb_dir = f"{db_path}",
         db_base = "genome"

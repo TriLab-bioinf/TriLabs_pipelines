@@ -16,11 +16,17 @@ rule peak_calling:
         broad = "--broad" if config["peak_calling"]["broad"] else "",
         misc_opts = config["peak_calling"]["other"],
         qvalue = config["peak_calling"]["q_value"]
+    log:
+        logmacs2 = "logs/4-peak_calling/{sample}.log"
     shell:
         """
         module load macs
 
-        macs2 callpeak -t {input.treat} -c {input.control} -f BAM -g {params.gsize} -n {params.name} -B -q {params.qvalue} --outdir {params.outdir} {params.broad} {params.misc_opts}
+        macs2 callpeak -t {input.treat} -c {input.control} \
+            -f BAM -g {params.gsize} \
+            -n {params.name} \
+            -B -q {params.qvalue} \
+            --outdir {params.outdir} {params.broad} {params.misc_opts} > {log.logmacs2} 2>&1
 
         """
 
@@ -34,12 +40,15 @@ rule bigwig:
         chip_bw = "results/4-peak_calling/{sample}_treat_pileup.bw"
     params:
         idx = f"{idx}"
+    log:
+        logbigwig_input = "logs/4-peak_calling/{sample}_bigwig_input.log",
+        logbigwig_chip = "logs/4-peak_calling/{sample}_bigwig_chip.log"
     shell:
         """
         module load ucsc
         
         cut -f1,2 {params.idx} > data/chrom.sizes
-        bedGraphToBigWig {input.control} data/chrom.sizes {output.control_bw}
-        bedGraphToBigWig {input.chip} data/chrom.sizes {output.chip_bw}
+        bedGraphToBigWig {input.control} data/chrom.sizes {output.control_bw} >  {log.logbigwig_input} 2>&1 
+        bedGraphToBigWig {input.chip} data/chrom.sizes {output.chip_bw} > {log.logbigwig_chip} 2>&1
   
         """
