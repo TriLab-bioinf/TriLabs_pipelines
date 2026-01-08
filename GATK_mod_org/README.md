@@ -1,10 +1,10 @@
-# How to run the GATK pipeline 
+# How to run the GATK_mod_org pipeline 
 
 ![](dag.png)
 
 **Figure 1:** Schematic representation of the Snakemake GATK pipeline
 
-## Running the GATK pipeline in Biowulf
+## Running the GATK_mod_org pipeline in Biowulf
 
 ### 1- Go the the GATK_mod_org folder and within the config directory do the following:
 
