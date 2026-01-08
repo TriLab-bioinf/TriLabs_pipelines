@@ -8,6 +8,20 @@ Note: This should be done only once.
 
 ### 1- Start an interactive session in Biowulf and go to your working directory (WD)
 
+```bash
+#Login to Biowulf
+ssh $USER@biowulf.nih.gov
+
+# Start interactive session
+sinteractive
+
+# Create working directory
+mkdir /data/$USER/my_pipelines
+
+# GO to working directory
+cd /data/$USER/my_pipelines
+```
+
 ### 2- Download the TriLabs Snakemake Pipelines to your working directory by running the following command
 
 ```bash
