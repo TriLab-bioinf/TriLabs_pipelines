@@ -15,3 +15,5 @@ rerun-incomplete: True
 # snakemake passes this on as --singularity-args "--cleanenv" - i.e. without
 # a `=`
 singularity-args: " --cleanenv"
+printshellcmds: True
+jobname: "{rule}.{jobid}"
