@@ -193,7 +193,7 @@ All pipelines include a Python utility (`parse_snakemake_commands.py`) that extr
 **Usage:**
 
 ```bash
-snakemake --snakefile ./workflow/PIPELINE.smk -p -n --forceall > snakemake_output.txt
+./run_snakemake.sh -n --forceall > snakemake_output.txt
 python parse_snakemake_commands.py -i snakemake_output.txt -o commands_ordered.txt
 ```
 
