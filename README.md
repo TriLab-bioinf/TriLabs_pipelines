@@ -180,6 +180,9 @@ All pipelines follow a similar structure and execution pattern:
 2. **Dry Run:** Test pipeline with `run_snakemake.sh -n`
 3. **Execution:** Submit to cluster with `sbatch run_snakemake.sh`
 4. **Results:** Find outputs in `results/` directory
+5. **Logs:** All the logs files generated during the run are stored in `logs/` directory
+6. **benchmark:** Benchmark files are kept in the `benchmark` folder
+
 
 ## Command Extraction Utility
 
