@@ -176,12 +176,13 @@ The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipel
 
 All pipelines follow a similar structure and execution pattern:
 
-1. **Configuration:** Edit `config/config.yaml` and `config/samplesheet.csv`
-2. **Dry Run:** Test pipeline with `run_snakemake.sh -n`
-3. **Execution:** Submit to cluster with `sbatch run_snakemake.sh`
-4. **Results:** Find outputs in `results/` directory
-5. **Logs:** All the logs files generated during the run are stored in `logs/` directory
-6. **Benchmark:** Benchmark files are kept in the `benchmark` folder
+1.**Workflow files:** Stored in the `workflow/` and workflow/ruls/ directories
+2. **Configuration:** Edit `config/config.yaml` and `config/samplesheet.csv`
+3. **Dry Run:** Test pipeline with `run_snakemake.sh -n`
+4. **Execution:** Submit to cluster with `sbatch run_snakemake.sh`
+5. **Results:** Find outputs in `results/` directory
+6. **Logs:** All the logs files generated during the run are stored in `logs/` directory
+7. **Benchmark:** Benchmark files are kept in the `benchmark` folder
 
 
 ## Command Extraction Utility
