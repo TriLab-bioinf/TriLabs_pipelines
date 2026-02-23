@@ -21,6 +21,8 @@ stardb:
 # 4. STAR ALIGNMENT
 # Set spliced_alignment to False if not using spliced alignment (for instance for bacterial or lower eukaryote genomes)
 spliced_alignment: True
+# Additional parameters you want to use with STAR: (e.g. "--winAnchorMultimapNmax 100 --outFilterMultimapNmax 100")
+other_star_params: ""
 
 # 5. READ FILES
 # Path to raw reads directory (fastq files) 

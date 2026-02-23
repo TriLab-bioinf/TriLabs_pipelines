@@ -80,7 +80,8 @@ rule map_reads:
     params: 
         stardb_dir = f"{db_path}",
         prefix = "results/2-map_reads/{sample}.",
-        spliced_alignment = "--alignIntronMax 1" if config["spliced_alignment"] == False else ""
+        spliced_alignment = "--alignIntronMax 1" if config["spliced_alignment"] == False else "",
+        other_star_params = f"{config['other_star_params']}"
     log: 
         logfile = "logs/2-map_reads/{sample}.star.log"
     shell:
@@ -99,7 +100,7 @@ rule map_reads:
                 --outFileNamePrefix {params.prefix} {params.spliced_alignment} \
                 --quantMode GeneCounts \
                 --outSAMtype BAM SortedByCoordinate \
-                --outSAMattrRGline ID:$$ SM:{wildcards.sample} PL:ILLUMINA \
+                --outSAMattrRGline ID:$$ SM:{wildcards.sample} PL:ILLUMINA {params.other_star_params} \
                 --outSAMattributes All > {log.logfile} 2>&1
 
         samtools index -@ 8 {output.bam} >> {log.logfile} 2>&1
