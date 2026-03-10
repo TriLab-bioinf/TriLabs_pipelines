@@ -1,0 +1,36 @@
+## Metadata
+
+# 1. METADATA FILE
+# Path to sample file
+metadata: ./config/samplesheet.csv
+
+# 2. GENOME REFERENCE INFORMATION
+reference:  
+    # Path to reference genome in fasta format
+    fasta: /fdb/bismark/mm10/mm10.fa
+
+# 3. BISMARK REFERENCE GENOME DIRECTORY   
+bismark:
+    # Path to directory where the Bismark's Bisulfite_Genome folder is located 
+    path: /fdb/bismark/mm10/
+    other_dedup_params: ""
+    other_meth_extract_params: ""
+    other_b2r_params: ""
+
+# 4. BISMARK ALIGNMENT
+    # Additional parameters you want to use with Bismark:
+    other_bismark_params: ""
+
+# 5. READ FILES
+# Path to raw reads directory (fastq files) 
+reads: data/reads
+# Set paired to False if single-end reads are used.
+# For now, only paired end reads are supported, so this should be set to True.
+paired: True
+
+# 6. TRIMMING
+# Path to trimming adapters file
+adapters: data/adapters/adapters.fa
+
+
+
