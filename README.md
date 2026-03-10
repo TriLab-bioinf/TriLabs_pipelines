@@ -172,6 +172,30 @@ The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipel
 
 ---
 
+### 6. BS-Seq Pipeline
+
+The BS-Seq pipeline is designed for processing bisulfite sequencing data to analyze DNA methylation patterns across the genome.
+
+**Key Features:**
+
+- Quality control and read trimming (fastp)
+- Alignment of bisulfite-converted reads to reference genome (Bismark)
+- PCR duplicate removal (Bismark deduplicate_bismark)
+- Cytosine methylation extraction and context-specific methylation calls (Bismark methylation extractor)
+- Pipeline QC report (MultiQC)
+
+**Typical Use Cases:**
+
+- Genome-wide DNA methylation profiling
+- Identification of differentially methylated regions (DMRs)
+- Comparative epigenetic analysis across conditions or treatments
+
+**Location:** `BS-Seq/`
+
+**Documentation:** See [BS-Seq/README.md](BS-Seq/README.md)
+
+---
+
 ## General Pipeline Usage
 
 All pipelines follow a similar structure and execution pattern:
