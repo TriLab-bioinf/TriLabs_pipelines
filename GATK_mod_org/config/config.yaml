@@ -45,9 +45,20 @@ trimming: True
 # Path to trimming adapters file
 adapters: data/adapters/adapters.fa
 
-# 7. GenomicsDBImport action, either 'create' or 'update'
+# 7. BASE RECALIBRATION
+# Perform base recalibration [True, False]
+# Set to False if no known sites are available for the species of interest, or if you want to skip this step
+recalibration: True
+
+# HAPLOTYPECALLER
+# HaplotypeCaller ploidy (default: 2)
+ploidy: 2
+
+# 8. GENOMICSDBIMPORT
+# GenomicsDBImport action, either 'create' or 'update'
 db_action: 'create'
-# 8. Merge contigs into num partitions (True, False). 
+
+# Merge contigs into num partitions (True, False). 
 # Set it to true if > 25 contigs are present in the reference genome
 merge_contigs: False
 

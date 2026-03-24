@@ -45,10 +45,11 @@ include: "rules/map_reads.smk"
 # 3- Flag duplicated reads with GATK MarkDuplicates
 include: "rules/mark_duplicates.smk"
 
-    # 4- Base recallibration with GATK BaseRecalibrator
-include: "rules/base_recalibrator.smk"
+# 4- Base recallibration with GATK BaseRecalibrator
+if config["recalibration"] == True:
+    include: "rules/base_recalibrator.smk"
 
-    # 5- Call variants for single samples with GATK HaplotypeCaller (GVCF format)
+# 5- Call variants for single samples with GATK HaplotypeCaller (GVCF format)
 include: "rules/gvcf_caller.smk"
 
 # 6- Merge by-chr-VCFs and split variants into SNPs and INDELs

@@ -2,8 +2,7 @@ rule gatk_base_recalibrator:
     input:
         bam = "results/3-dedup/{sample}.dedup.bam",
         ref = f"{genome}",
-        refdict = f"{genome_dict}",
-        known = f"{dbsnp}"  # optional known sites - single or a list
+        refdict = f"{genome_dict}"
     output:
         recal_table = "results/4-recal/{sample}.grp",
     log:
@@ -11,6 +10,7 @@ rule gatk_base_recalibrator:
     params:
         extra = "",  # optional
         java_opts = "",  # optional
+        known_sites = f"--known-sites {dbsnp}",  # optional, e.g., "--known-sites /path/to/known_sites.vcf"
     resources:
         partition = "normal",
         runtime = 24 * 60,
@@ -21,8 +21,7 @@ rule gatk_base_recalibrator:
 
         gatk BaseRecalibrator \
 			-R {input.ref} \
-			-I {input.bam} \
-			--known-sites {input.known} \
+			-I {input.bam} {params.known_sites} \
 			-O {output.recal_table} > {log} 2>&1
         
         """

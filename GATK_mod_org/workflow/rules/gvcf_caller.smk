@@ -2,7 +2,7 @@
 rule haplotype_caller_gvcf:
     input:
         # single or list of bam files
-        bam = "results/5-recal/{sample}.recal.bam",
+        bam = "results/5-recal/{sample}.recal.bam" if config["recalibration"] == True else "results/3-dedup/{sample}.dedup.bam",
         ref = f"{genome}"
         # known="dbsnp.vcf"  # optional
     output:
@@ -14,6 +14,7 @@ rule haplotype_caller_gvcf:
         exome_interval_padding = f"--interval-padding {config['interval_padding']}" if config["exomeseq"] == True else "",
         extra = f"-A StrandBiasBySample --standard-min-confidence-threshold-for-calling 30 -dont-use-soft-clipped-bases ",  # optional
         java_opts = "",  # optional
+        ploidy = f"--sample-ploidy {config['ploidy']}"
     threads: 4
     resources:
         partition = "normal",
@@ -31,7 +32,7 @@ rule haplotype_caller_gvcf:
             -O {output.gvcf} \
             -ERC GVCF \
             --native-pair-hmm-threads {threads} \
-            {params.extra} {params.exome_intervals} {params.exome_interval_padding} > {log} 2>&1
+            {params.ploidy} {params.extra} {params.exome_intervals} {params.exome_interval_padding} > {log} 2>&1
         """
 
 # build variant DB with GenomicsDBImport wrapper

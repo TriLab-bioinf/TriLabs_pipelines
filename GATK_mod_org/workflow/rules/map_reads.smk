@@ -67,7 +67,7 @@ rule map_reads:
         "benchmarks/2-map_reads/{sample}.bwa.tsv"
     params: 
         prefix = "{sample}",
-        bwadb_dir = f"{db_path}",
+        bwadb_dir = "data/bwadb/genome.fa" if (bwadb_path == "None") else f"{db_path}",
         db_base = "genome.fa",
         rg_line = lambda wildcards: f"\"ID:{ID[wildcards.sample]}\t" + 
                                     f"SM:{wildcards.sample}\t" + 
@@ -80,7 +80,7 @@ rule map_reads:
         """
         module load bwa/0.7.17 samtools/1.21
 
-        bwa mem {params.bwadb_dir}/{params.db_base} \
+        bwa mem {params.bwadb_dir} \
             {input.fq1} {input.fq2} -t {threads} | \
         samtools view -hb - | \
         samtools addreplacerg -r {params.rg_line} -O BAM - | \
