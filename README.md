@@ -1,4 +1,4 @@
-# TriLabs Snakemake Pipelines
+# TriLab Snakemake Pipelines
 
 This repository contains a collection of Snakemake pipelines for processing various types of sequencing data. All pipelines are optimized for running on the Biowulf HPC cluster at NIH.
 
