@@ -153,7 +153,7 @@ The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipel
 - Quality control and read trimming (fastp)
 - Read alignment to reference (bwa2)
 - Duplicate removal (GATK MarkDuplicates)
-- Base quality score recalibration (BQSR) (GATK BaseRecalibrator -> ApplyBQSR)
+- Optional base quality score recalibration (BQSR) (GATK BaseRecalibrator -> ApplyBQSR)
 - Variant calling per sample using HaplotypeCaller (GVCF) (GATK HaplotypeCaller)
 - Implementation of GenomicsDB for efficient variant analysis of large cohorts (GATK GenomicsDBImport)
 - Joint genotyping across multiple samples (GATK GenotypeGVCFs)
