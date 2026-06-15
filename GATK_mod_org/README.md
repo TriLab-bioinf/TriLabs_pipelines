@@ -1,4 +1,4 @@
-# How to run the GATK_mod_org pipeline 
+# How to run the GATK_mod_org pipeline (For organisms other than human)
 
 ![](dag.png)
 
