@@ -142,7 +142,7 @@ _Note: Support for WES data is not yet implemented_
 
 ---
 
-### 5. GATK Modified for Other Organisms (GATK_mod_org)
+### 5. GATK_mod_org (For non-human organisms)
 
 The GATK_mod_org pipeline is a flexible, organism-agnostic variant calling pipeline adapted from GATK best practices. It can process whole genome or whole exome sequencing data from any organism for SNP and INDEL identification.
 
