@@ -1,4 +1,4 @@
-# How to run the GATK pipeline 
+# How to run the GATK pipeline (Human germline)
 
 ![](dag.png)
 
