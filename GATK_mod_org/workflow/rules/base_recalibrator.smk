@@ -13,7 +13,7 @@ rule gatk_base_recalibrator:
         known_sites = f"--known-sites {dbsnp}",  # optional, e.g., "--known-sites /path/to/known_sites.vcf"
     resources:
         partition = "normal",
-        runtime = 24 * 60,
+        runtime = 48 * 60,
         mem_mb = 1024 * 16,
     shell:
         """
