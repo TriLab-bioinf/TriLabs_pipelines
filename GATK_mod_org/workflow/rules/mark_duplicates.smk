@@ -16,7 +16,7 @@ rule mark_duplicates:
         "benchmarks/3-dedup/{sample}.tsv"
     resources:
         partition = "norm",
-        runtime = 14 * 60,
+        runtime = 48 * 60,
         mem_mb = 1024 * 100,
         disk_mb= 1024 * 20,
         gres = "lscratch:80"
