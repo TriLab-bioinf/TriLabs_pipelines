@@ -10,7 +10,7 @@ if (bwadb_path == "None") and (not os.path.exists("data/bwadb/genome.fa")):
         output: db = "data/bwadb/genome.fa",
         resources: 
             partition = "norm",
-            runtime = 14 * 60,
+            runtime = 48 * 60,
             mem_mb = 1024 * 100,
             disk_mb= 1024 * 50
         threads: 8
