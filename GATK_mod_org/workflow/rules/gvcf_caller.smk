@@ -18,7 +18,7 @@ rule haplotype_caller_gvcf:
     threads: 4
     resources:
         partition = "normal",
-        runtime = 8 * 60,
+        runtime = 96 * 60,
         mem_mb= 8 * 1024
     benchmark:
         "benchmarks/calls-gvfc/{sample}.g.vcf.tsv"
