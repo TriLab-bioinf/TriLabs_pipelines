@@ -29,7 +29,7 @@ rule trimming_fastp:
     threads: 8
     resources:
         partition="quick",
-        runtime=4 * 60,
+        runtime=48 * 60,
         mem_mb=32000,
     log:
         logfile="logs/1-trim/{sample}.log",
